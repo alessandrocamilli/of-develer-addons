@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+		 
+		<!-- 
+        Vat End Statement
+         -->
+        <record id="openforce_account_vat_end_statement_form_view" model="ir.ui.view">
+            <field name="name">openforce.account.vat.end.statement.form.view</field>
+            <field name="model">account.vat.period.end.statement</field>
+            <field name="inherit_id" ref="account_vat_period_end_statement.view_account_vat_period_end_statement"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                   	<field name="interest" on_change="onchange_interest(interest)"/>
+                   	<field name="interest_percent"
+                   	    attrs="{'invisible': [('interest', '=', False)], 'required': [('interest', '=', True)]}"/>
+           		</xpath>
+           		
+           		
+           		<xpath expr="//field[@name='generic_vat_account_line_ids']/tree/field[@name='account_id']" position="after">
+           			<field name="description" />
+           		</xpath>
+           		<xpath expr="//field[@name='generic_vat_account_line_ids']/form/field[@name='account_id']" position="after">
+           			<field name="description" />
+           		</xpath>
+                
+            </field>
+        </record>
+    	
+    </data>
+</openerp>

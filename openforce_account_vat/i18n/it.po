@@ -1,0 +1,232 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* openforce_account_vat
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-11 19:11+0000\n"
+"PO-Revision-Date: 2015-02-11 19:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: code:addons/openforce_account_vat/report/vat_period_end_statement.py:48
+#. module: openforce_account_vat
+#, python-format
+msgid "Too many occurences of tax code %s"
+msgstr "Too many occurences of tax code %s"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:217
+#. module: openforce_account_vat
+msgid "Previous Debits VAT"
+msgstr "Debito IVA precedente"
+
+#: model:ir.model,name:openforce_account_vat.model_statement_generic_account_line
+#. module: openforce_account_vat
+msgid "statement.generic.account.line"
+msgstr "statement.generic.account.line"
+
+#: field:account.vat.period.end.statement,interest:0
+#. module: openforce_account_vat
+msgid "Compute Interest"
+msgstr "Calcola interessi"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:45
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:92
+#. module: openforce_account_vat
+msgid "Tax Code"
+msgstr "Codice IVA"
+
+#: code:addons/openforce_account_vat/report/vat_period_end_statement.py:48
+#: code:addons/openforce_account_vat/report/vat_period_end_statement.py:56
+#: code:addons/openforce_account_vat/report/vat_period_end_statement.py:61
+#. module: openforce_account_vat
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#: view:openforce.config.settings:0
+#. module: openforce_account_vat
+msgid "Percent"
+msgstr "%"
+
+#: help:openforce.config.settings,of_account_end_vat_statement_print_all_tax:0
+#: help:res.company,of_account_end_vat_statement_print_all_tax:0
+#. module: openforce_account_vat
+msgid "Print all taxes, also without amount"
+msgstr "Stampa tutte le aliquote, anche senza importi"
+
+#: code:addons/openforce_account_vat/report/vat_period_end_statement.py:56
+#. module: openforce_account_vat
+#, python-format
+msgid "No base code found for tax code %s"
+msgstr "No base code found for tax code %s"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:42
+#. module: openforce_account_vat
+msgid "Sales"
+msgstr "Vendite"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:140
+#. module: openforce_account_vat
+msgid "Debit"
+msgstr "Debito"
+
+#: field:statement.generic.account.line,description:0
+#. module: openforce_account_vat
+msgid "Description"
+msgstr "Description"
+
+#: model:ir.model,name:openforce_account_vat.model_account_vat_period_end_statement
+#. module: openforce_account_vat
+msgid "account.vat.period.end.statement"
+msgstr "account.vat.period.end.statement"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:46
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:93
+#. module: openforce_account_vat
+msgid "Base"
+msgstr "Imponibile"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:38
+#. module: openforce_account_vat
+msgid "Date"
+msgstr "Data"
+
+#: code:addons/openforce_account_vat/account.py:88
+#. module: openforce_account_vat
+#, python-format
+msgid "Error VAT Configuration!"
+msgstr "Error VAT Configuration!"
+
+#: code:addons/openforce_account_vat/account.py:89
+#. module: openforce_account_vat
+#, python-format
+msgid "The account for vat interest must be configurated"
+msgstr "The account for vat interest must be configurated"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:37
+#. module: openforce_account_vat
+msgid "VAT Statement Summary"
+msgstr "Liquidazione IVA"
+
+#: view:openforce.config.settings:0
+#. module: openforce_account_vat
+msgid "Account"
+msgstr "Contabilita"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:212
+#. module: openforce_account_vat
+msgid "Previous Credits VAT"
+msgstr "Credito IVA precedente"
+
+#: field:openforce.config.settings,of_account_end_vat_statement_print_all_tax:0
+#: field:res.company,of_account_end_vat_statement_print_all_tax:0
+#. module: openforce_account_vat
+msgid "Interest on End Vat Statement - Print all taxes"
+msgstr "Liquidazione- Stampa tutte le aliquote"
+
+#: model:ir.model,name:openforce_account_vat.model_res_company
+#. module: openforce_account_vat
+msgid "Companies"
+msgstr "Aziende"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:229
+#. module: openforce_account_vat
+msgid "Totale da Versare"
+msgstr "Totale da Versare"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:136
+#. module: openforce_account_vat
+msgid "Summary"
+msgstr "Sommario"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:141
+#. module: openforce_account_vat
+msgid "Credit"
+msgstr "Credito"
+
+#: field:openforce.config.settings,of_account_end_vat_statement_interest_percent:0
+#: field:res.company,of_account_end_vat_statement_interest_percent:0
+#. module: openforce_account_vat
+msgid "Interest on End Vat Statement - %"
+msgstr "Interessi su liquidazione - %"
+
+#: field:openforce.config.settings,of_account_end_vat_statement_interest_account_id:0
+#: field:res.company,of_account_end_vat_statement_interest_account_id:0
+#. module: openforce_account_vat
+msgid "Interest on End Vat Statement - Account"
+msgstr "Interessi su liquidazione - Conto"
+
+#: field:openforce.config.settings,of_account_end_vat_statement_interest:0
+#: field:res.company,of_account_end_vat_statement_interest:0
+#. module: openforce_account_vat
+msgid "Interest on End Vat Statement"
+msgstr "Interessi su liquidazione"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:71
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:118
+#. module: openforce_account_vat
+msgid "Totals"
+msgstr "Totali"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:47
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:94
+#: view:openforce.config.settings:0
+#. module: openforce_account_vat
+msgid "VAT"
+msgstr "IVA"
+
+#: code:addons/openforce_account_vat/report/vat_period_end_statement.py:61
+#. module: openforce_account_vat
+#, python-format
+msgid "Not every tax linked to tax code %s is linked the same base code"
+msgstr "Not every tax linked to tax code %s is linked the same base code"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:89
+#. module: openforce_account_vat
+msgid "Purchases"
+msgstr "Acquisti"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:167
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:207
+#. module: openforce_account_vat
+msgid "Total"
+msgstr "Totale"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:202
+#. module: openforce_account_vat
+msgid "Totale Liquidazione "
+msgstr "Totale Liquidazione "
+
+#: field:account.vat.period.end.statement,interest_percent:0
+#. module: openforce_account_vat
+msgid "Interest - Percent"
+msgstr "% interessi"
+
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:54
+#: report:addons/openforce_account_vat/report/vat_period_end_statement.mako:101
+#. module: openforce_account_vat
+msgid "Period"
+msgstr "Periodo"
+
+#: model:ir.model,name:openforce_account_vat.model_openforce_config_settings
+#. module: openforce_account_vat
+msgid "openforce.config.settings"
+msgstr "openforce.config.settings"
+
+#: help:openforce.config.settings,of_account_end_vat_statement_interest:0
+#: help:openforce.config.settings,of_account_end_vat_statement_interest_account_id:0
+#: help:openforce.config.settings,of_account_end_vat_statement_interest_percent:0
+#: help:res.company,of_account_end_vat_statement_interest:0
+#: help:res.company,of_account_end_vat_statement_interest_account_id:0
+#: help:res.company,of_account_end_vat_statement_interest_percent:0
+#. module: openforce_account_vat
+msgid "Apply interest on end vat statement"
+msgstr "Applica interessi su liquidazione"
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+		 
+		<!-- 
+        Openforce Config
+         -->
+        <record id="openforce_config_account_vat_form_view" model="ir.ui.view">
+            <field name="name">openforce.config.account.vat.form.view</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//separator[@string='Bank &amp; Cash']" position="before">
+                	<group string="VAT">
+                		<field name="of_account_end_vat_statement_print_all_tax"/>
+                        <field name="of_account_end_vat_statement_interest"/>
+                        <field name="of_account_end_vat_statement_interest_percent" string="Percent"
+                            attrs="{'invisible': [('of_account_end_vat_statement_interest', '=', False)], 'required': [('of_account_end_vat_statement_interest', '=', True)]}"/>
+                        <field name="of_account_end_vat_statement_interest_account_id" string="Account"
+                            attrs="{'invisible': [('of_account_end_vat_statement_interest', '=', False)], 'required': [('of_account_end_vat_statement_interest', '=', True)]}"/>
+                   	</group>
+           		</xpath>
+                
+            </field>
+        </record>
+    	
+    </data>
+</openerp>
