@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <!-- 
+	    Account invoice
+	    -->
+	    <record id="vat_split_payment_account_invoice_form" model="ir.ui.view">
+            <field name="name">vat.split.payment.account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                
+                <!-- Move by split payment -->
+                <xpath expr="//field[@name='move_id']" position="after">
+                    <field name="split_payment_move_id"/>
+                </xpath>
+                
+            </field>
+        </record>
+        
+        
+        <!--
+        Statement VAT end period
+         -->
+         
+        <record id="vat_split_payment_period_end_statement" model="ir.ui.view">
+            <field name="name">vat.split.payment.vat.period.end.statement.form</field>
+            <field name="model">account.vat.period.end.statement</field>
+            <field name="inherit_id" ref="account_vat_period_end_statement.view_account_vat_period_end_statement"></field>
+            <field name="arch" type="xml">
+                 
+                <xpath expr="//page[@string='Tax Authority']" position="after">
+                    <page string="Split Payments">
+                        <field name="split_payment_line_ids" nolabel="1">
+                            <tree string="Split Payments" version="7.0">
+				            	<field name="partner_id"/>
+				            	<field name="invoice_id"/>
+				            	<field name="tax_code_id"/>
+				            	<field name="tax_amount" sum="Total"/>
+				            	<field name="account_to_split_id"/>
+				            	<field name="reconcile_id"/>
+				            </tree>
+                        </field>
+                    </page>
+               	</xpath>  
+            </field>
+        </record>
+        
+        <!--
+        Account TAX CODE
+         -->
+        <record id="vat_split_payment_tax_code_form" model="ir.ui.view">
+            <field name="name">vat.split.payment.tax.code.form</field>
+            <field name="model">account.tax.code</field>
+            <field name="inherit_id" 
+            	ref="account_vat_period_end_statement.view_tax_code_form"/>
+            <field name="arch" type="xml">
+            
+                <xpath expr="//field[@name='vat_statement_sign']" position="after">
+	                <field name="split_payment"/>
+           		</xpath>
+           		
+            </field>
+        </record>
+        
+     </data>
+</openerp>
