@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-17 14:12+0000\n"
-"PO-Revision-Date: 2015-06-17 14:12+0000\n"
+"POT-Creation-Date: 2015-06-17 15:05+0000\n"
+"PO-Revision-Date: 2015-06-17 15:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,108 +15,108 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#: view:account.config.settings:0
 #. module: openforce_account_vat
+#: view:account.config.settings:0
 msgid "Account"
 msgstr "Account"
 
+#. module: openforce_account_vat
 #: help:account.config.settings,of_account_end_vat_statement_interest:0
 #: help:account.config.settings,of_account_end_vat_statement_interest_account_id:0
 #: help:account.config.settings,of_account_end_vat_statement_interest_percent:0
 #: help:res.company,of_account_end_vat_statement_interest:0
 #: help:res.company,of_account_end_vat_statement_interest_account_id:0
 #: help:res.company,of_account_end_vat_statement_interest_percent:0
-#. module: openforce_account_vat
 msgid "Apply interest on end vat statement"
 msgstr "Applica interessi su liquidazione"
 
-#: model:ir.model,name:openforce_account_vat.model_res_company
 #. module: openforce_account_vat
+#: model:ir.model,name:openforce_account_vat.model_res_company
 msgid "Companies"
 msgstr "Aziende"
 
-#: field:account.vat.period.end.statement,interest:0
 #. module: openforce_account_vat
+#: field:account.vat.period.end.statement,interest:0
 msgid "Compute Interest"
 msgstr "Calcola interessi"
 
-#: field:account.vat.period.end.statement,interest_percent:0
 #. module: openforce_account_vat
+#: field:account.vat.period.end.statement,interest_percent:0
 msgid "Interest - Percent"
 msgstr "% interessi"
 
+#. module: openforce_account_vat
 #: field:account.config.settings,of_account_end_vat_statement_interest:0
 #: field:res.company,of_account_end_vat_statement_interest:0
-#. module: openforce_account_vat
 msgid "Interest on End Vat Statement"
 msgstr "Interessi su liquidazione"
 
+#. module: openforce_account_vat
 #: field:account.config.settings,of_account_end_vat_statement_interest_percent:0
 #: field:res.company,of_account_end_vat_statement_interest_percent:0
-#. module: openforce_account_vat
 msgid "Interest on End Vat Statement - %"
 msgstr "Interessi su liquidazione - %"
 
+#. module: openforce_account_vat
 #: field:account.config.settings,of_account_end_vat_statement_interest_account_id:0
 #: field:res.company,of_account_end_vat_statement_interest_account_id:0
-#. module: openforce_account_vat
 msgid "Interest on End Vat Statement - Account"
 msgstr "Interessi su liquidazione - Conto"
 
+#. module: openforce_account_vat
 #: field:account.config.settings,of_account_end_vat_statement_print_all_tax:0
 #: field:res.company,of_account_end_vat_statement_print_all_tax:0
-#. module: openforce_account_vat
 msgid "Interest on End Vat Statement - Print all taxes"
 msgstr "Liquidazione- Stampa tutte le aliquote"
 
-#: view:account.vat.period.end.statement:0
 #. module: openforce_account_vat
+#: view:account.vat.period.end.statement:0
 msgid "Page Number"
 msgstr "Numerazione Pagine"
 
-#: view:account.config.settings:0
 #. module: openforce_account_vat
+#: view:account.config.settings:0
 msgid "Percent"
 msgstr "Percent"
 
-#: view:account.vat.period.end.statement:0
 #. module: openforce_account_vat
+#: view:account.vat.period.end.statement:0
 msgid "Print Options"
 msgstr "Opzioni di stampa"
 
+#. module: openforce_account_vat
 #: help:account.config.settings,of_account_end_vat_statement_print_all_tax:0
 #: help:res.company,of_account_end_vat_statement_print_all_tax:0
-#. module: openforce_account_vat
 msgid "Print all taxes, also without amount"
 msgstr "Stampa tutte le aliquote, anche senza importi"
 
-#: view:account.vat.period.end.statement:0
 #. module: openforce_account_vat
+#: view:account.vat.period.end.statement:0
 msgid "Summary"
 msgstr "Sommario"
 
-#: view:account.config.settings:0
 #. module: openforce_account_vat
+#: view:account.config.settings:0
 msgid "VAT"
 msgstr "IVA"
 
-#: model:ir.actions.report.xml,name:openforce_account_vat.print_vat_period_end_statement
 #. module: openforce_account_vat
+#: model:ir.actions.report.xml,name:openforce_account_vat.of_print_vat_period_end_statement
 msgid "VAT Statement Summary"
 msgstr "Prospetto liquidazione IVA"
 
-#: model:ir.model,name:openforce_account_vat.model_account_config_settings
 #. module: openforce_account_vat
+#: model:ir.model,name:openforce_account_vat.model_account_config_settings
 msgid "account.config.settings"
 msgstr "account.config.settings"
 
-#: model:ir.model,name:openforce_account_vat.model_account_vat_period_end_statement
 #. module: openforce_account_vat
+#: model:ir.model,name:openforce_account_vat.model_account_vat_period_end_statement
 msgid "account.vat.period.end.statement"
 msgstr "account.vat.period.end.statement"
 
-#: model:ir.model,name:openforce_account_vat.model_statement_generic_account_line
 #. module: openforce_account_vat
+#: model:ir.model,name:openforce_account_vat.model_statement_generic_account_line
 msgid "statement.generic.account.line"
 msgstr "statement.generic.account.line"
 

@@ -53,11 +53,16 @@ class account_vat_period_end_statement(orm.Model):
     _columns = {
             'interest': fields.boolean('Compute Interest'),
             'interest_percent': fields.float('Interest - Percent'),
+            'print_account_vat_group': fields.boolean('Group by account VAT'),
+            'print_page_from': fields.integer('Page number from'),
+            'print_page_year': fields.char('Page number year', size=10),
         }
     
     _defaults = {
             'interest' : _get_default_interest,
-            'interest_percent' : _get_default_interest_percent
+            'interest_percent' : _get_default_interest_percent,
+            'print_account_vat_group': True,
+            'print_page_from': 1,
         }
     
     
@@ -94,7 +99,6 @@ class account_vat_period_end_statement(orm.Model):
         '''
         Line of Interest
         '''
-        account_vat_prorata_statement_obj = self.pool['account.vat.prorata.statement']
         statement_generic_account_line_obj = self.pool['statement.generic.account.line'] 
         decimal_precision_obj = self.pool['decimal.precision']
         

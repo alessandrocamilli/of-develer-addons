@@ -24,6 +24,18 @@
            		<xpath expr="//field[@name='generic_vat_account_line_ids']/form/field[@name='account_id']" position="after">
            			<field name="description" />
            		</xpath>
+           		
+                <xpath expr="//page[@string='Tax Authority']" position="after">
+                		<page string="Print Options">
+                            <group colspan="4" string="Page Number">
+                                <field name="print_page_from"/>
+                                <field name="print_page_year"/>
+                            </group>
+                            <group colspan="4" string="Summary">
+                                <field name="print_account_vat_group"/>
+                            </group>
+                        </page>
+                 </xpath>
                 
             </field>
         </record>

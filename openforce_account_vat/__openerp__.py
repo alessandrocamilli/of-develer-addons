@@ -27,6 +27,7 @@
     - Report End Vat Period with summary changed
     - Compute Interest
     - Add field description for generic lines
+    - Report Page Options
 """,
     'author': 'Openforce',
     'website': 'http://www.openforce.it',
