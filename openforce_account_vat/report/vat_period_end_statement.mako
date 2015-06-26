@@ -102,7 +102,7 @@ td {
 				<% tax_code_vat = ps_tax_codes_amounts[ps_tax_code]['vat'] %>
 				<% tax_code_vat_deductible = ps_tax_codes_amounts[ps_tax_code]['vat_deductible'] %>
 				<% tax_code_vat_undeductible = ps_tax_codes_amounts[ps_tax_code]['vat_undeductible'] %>
-				## ... Credit have negative values : in the report will be positive
+				## ... Credits are negative : in the report will be positive
 				<% tax_code_base = -1 * tax_code_base %>
 				<% tax_code_vat = -1 * tax_code_vat %>
 				<% tax_code_vat_deductible = -1 * tax_code_vat_deductible %>
@@ -194,7 +194,113 @@ td {
 			</tr>
         </tbody>
         </table>
+        
+        ## --------------
+		## Purchase - Suspension
+		## --------------
+		%if 'credit_vat_suspension_account_line_ids' in statement:
+		<h4>${ _('Purchase Suspension')} </h4>
+		<table class="table table-condensed">
+		<thead>
+           	<tr>
+               	<th style="width:12%;" class="text-left">${ _('Vat code')} </th>
+               	<th style="width:37%;" class="text-left">${ _('Description')} </th>
+               	<th style="width:15%;" class="amount"> </th>
+               	<th style="width:12%;" class="amount"> </th>
+               	## Columns Deductible / Undeductible only for purchase
+               	<th style="width:12%;" class="amount">${ _('Amount Registred')} </th>
+               	<th style="width:12%;" class="amount">${ _('Amount Paid')} </th>
+        	</tr>
+       	</thead>
+       	<tbody>
+       		## Reset Totals
+       		<% total_registred = 0 %>
+			<% total_paid = 0 %>
+			%for line_suspension in statement.credit_vat_suspension_account_line_ids :
+				## Prepare values
+				<% amount_registred = line_suspension.amount %>
+				<% amount_paid = line_suspension.paid %>
+				<tr class="line_data">
+					<td>${ line_suspension.tax_code_id.code|entity }</td>
+					<td>${ line_suspension.tax_code_id.name|entity }</td>
+					<td class="amount"></td>
+					<td class="amount"></td>
+					<td class="amount">${ formatLang(amount_registred)|entity }</td>
+					<td class="amount">${ formatLang(amount_paid)|entity }</td>
+				</tr>
+				## Sum Totals
+				<% total_registred = total_registred + amount_registred %>
+				<% total_paid = total_paid + amount_paid %>
+        	%endfor
+        	## Print Totals
+        	<tr class="line_subtotal">
+				<td></td>
+				<td class="total amount">${ _('Total') }</td>
+				<td class="subtotal amount"></td>
+				<td class="subtotal amount"></td>
+				<td class="subtotal amount">${ formatLang(total_registred)|entity }</td>
+				<td class="subtotal amount">${ formatLang(total_paid)|entity }</td>
+			</tr>
+        </tbody>
+        </table>
+        %endif
+        
+        ## --------------
+		## Sale - Suspension
+		## --------------
+		%if 'debit_vat_suspension_account_line_ids' in statement:
+		<h4>${ _('Sale Suspension')} </h4>
+		<table class="table table-condensed">
+		<thead>
+           	<tr>
+               	<th style="width:12%;" class="text-left">${ _('Vat code')} </th>
+               	<th style="width:37%;" class="text-left">${ _('Description')} </th>
+               	<th style="width:15%;" class="amount"> </th>
+               	<th style="width:12%;" class="amount"> </th>
+               	## Columns Deductible / Undeductible only for purchase
+               	<th style="width:12%;" class="amount">${ _('Amount Registred')} </th>
+               	<th style="width:12%;" class="amount">${ _('Amount Paid')} </th>
+        	</tr>
+       	</thead>
+       	<tbody>
+       		## Reset Totals
+       		<% total_registred = 0 %>
+			<% total_paid = 0 %>
+			%for line_suspension in statement.debit_vat_suspension_account_line_ids :
+				## Prepare values
+				<% amount_registred = line_suspension.amount %>
+				<% amount_paid = line_suspension.paid %>
+				## ... Debits in suspension are negative : in the report will be positive
+				<% amount_registred = -1 * amount_registred %>
+				<% amount_paid = -1 * amount_paid %>
+				<tr class="line_data">
+					<td>${ line_suspension.tax_code_id.code|entity }</td>
+					<td>${ line_suspension.tax_code_id.name|entity }</td>
+					<td class="amount"></td>
+					<td class="amount"></td>
+					<td class="amount">${ formatLang(amount_registred)|entity }</td>
+					<td class="amount">${ formatLang(amount_paid)|entity }</td>
+				</tr>
+				## Sum Totals
+				<% total_registred = total_registred + amount_registred %>
+				<% total_paid = total_paid + amount_paid %>
+        	%endfor
+        	## Print Totals
+        	<tr class="line_subtotal">
+				<td></td>
+				<td class="total amount">${ _('Total') }</td>
+				<td class="subtotal amount"></td>
+				<td class="subtotal amount"></td>
+				<td class="subtotal amount">${ formatLang(total_registred)|entity }</td>
+				<td class="subtotal amount">${ formatLang(total_paid)|entity }</td>
+			</tr>
+        </tbody>
+        </table>
+        %endif
+        
     %endfor ## >> for periods
+    
+    	
     
 	## ======================
 	## Total Statement

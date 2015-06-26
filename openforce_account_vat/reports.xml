@@ -86,7 +86,7 @@ thead{
         
         <report
             auto="False"
-            id="of_print_vat_period_end_statement"
+            id="openforce_account_vat.print_vat_period_end_statement"
             model="account.vat.period.end.statement"
             name="account.print.vat.period.end.statement_openforce_vat"
             file="openforce_account_vat/report/vat_period_end_statement.mako"

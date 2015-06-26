@@ -161,6 +161,7 @@ class of_print_vat_period_end_statement(report_sxw.rml_parse):
                 account_amounts[account_id]['amount'] += line.amount
         return account_amounts
     
+    
 report_sxw.report_sxw('report.account.print.vat.period.end.statement_openforce_vat',
                       'account.vat.period.end.statement',
                       'addons/openforce_account_vat/report/vat_period_end_statement.mako',

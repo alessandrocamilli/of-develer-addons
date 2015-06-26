@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>  
+		 
+		<!-- 
+        Vat End Statement
+         -->
+        <record id="of_account_vat_vop_end_statement_form_view" model="ir.ui.view">
+            <field name="name">of.account.vat.vop.end.statement.form.view</field>
+            <field name="model">account.vat.period.end.statement</field>
+            <field name="inherit_id" ref="account_vat_period_end_statement.view_account_vat_period_end_statement"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//page[@string='Tax Authority']" position="after">
+                		<page string="Vat Suspension">
+                			<group>
+                				<group>
+                					<field name="debit_vat_suspension_account_line_ids" nolabel="1"  >
+                						<tree string="Debit Suspension Account Lines">
+                                            <field name="tax_code_id" />
+                                            <field name="account_id" />
+                                            <field name="amount" sum="Total Registred" />
+                                            <field name="paid" sum="Total Paid"/>
+                                       </tree>
+                                        <form>
+                                        	<group>
+	                                        	<group>
+	                                        		<field name="tax_code_id" />
+	                                        	</group>
+	                                        	<group>
+	                                        		<field name="account_id" />
+	                                        	</group>
+                                        	</group>
+                                        	<newline/>
+                                        	<group>
+	                                        	<field name="amount" />
+	                                        	<field name="paid" />
+	                                        </group>
+	                                        <newline/>
+                                            <group>
+	                                        	<field name="line_payment_ids" nolabel="1" readonly="1"/>
+	                                        </group>
+                                       </form>
+                					</field>
+                				</group>
+                				<group>
+                					<field name="credit_vat_suspension_account_line_ids" nolabel="1"  >
+                						<tree string="Credit Suspension Account Lines">
+                                            <field name="tax_code_id" />
+                                            <field name="account_id" />
+                                            <field name="amount" sum="Total Registred" />
+                                            <field name="paid" sum="Total Paid" />
+                                       </tree>
+                                        <form>
+                                            <group>
+	                                        	<group>
+	                                        		<field name="tax_code_id" />
+	                                        	</group>
+	                                        	<group>
+	                                        		<field name="account_id" />
+	                                        	</group>
+                                        	</group>
+                                        	<newline/>
+                                        	<group>
+	                                        	<field name="amount" />
+	                                        	<field name="paid" />
+	                                        </group>
+	                                        <newline/>
+                                            <group>
+	                                        	<field name="line_payment_ids" nolabel="1" readonly="1"/>
+	                                        </group>
+                                       </form>
+                					</field>
+                				</group>
+                			</group>
+                        </page>
+                 </xpath>
+                
+            </field>
+        </record>
+    	
+    </data>
+</openerp>
