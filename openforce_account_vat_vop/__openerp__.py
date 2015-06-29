@@ -20,7 +20,7 @@
 #
 ##############################################################################
 {
-    'name': 'Account VAT - Vat On Payment ',
+    'name': 'Account VAT - Vat On Payment',
     'version': '0.1',
     'category': 'Account Italy',
     'description': """

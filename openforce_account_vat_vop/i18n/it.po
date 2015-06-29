@@ -1,0 +1,114 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* openforce_account_vat_vop
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-29 08:11+0000\n"
+"PO-Revision-Date: 2015-06-29 08:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: field:statement.credit.suspension.account.line,account_id:0
+#: field:statement.debit.suspension.account.line,account_id:0
+#. module: openforce_account_vat_vop
+msgid "Account"
+msgstr "Conto"
+
+#: field:statement.credit.suspension.account.line,amount:0
+#: field:statement.debit.suspension.account.line,amount:0
+#. module: openforce_account_vat_vop
+msgid "Amount"
+msgstr "Importo Registrato"
+
+#: view:account.vat.period.end.statement:0
+#. module: openforce_account_vat_vop
+msgid "Credit Suspension Account Lines"
+msgstr "IVA a Credito in Sospensione - Linee"
+
+#: field:account.vat.period.end.statement,credit_vat_suspension_account_line_ids:0
+#. module: openforce_account_vat_vop
+msgid "Credit suspension VAT"
+msgstr "IVA a Credito in Sospensione"
+
+#: view:account.vat.period.end.statement:0
+#. module: openforce_account_vat_vop
+msgid "Debit Suspension Account Lines"
+msgstr "IVA a Debito in Sospensione - Linee"
+
+#: field:account.vat.period.end.statement,debit_vat_suspension_account_line_ids:0
+#. module: openforce_account_vat_vop
+msgid "Debit suspension VAT"
+msgstr "IVA a Debito in Sospensione"
+
+#: field:statement.credit.suspension.account.line,paid:0
+#: field:statement.debit.suspension.account.line,paid:0
+#. module: openforce_account_vat_vop
+msgid "Paid"
+msgstr "Importo Pagato"
+
+#: model:ir.model,name:openforce_account_vat_vop.model_account_tax_code
+#: field:statement.credit.suspension.account.line,tax_code_id:0
+#: field:statement.debit.suspension.account.line,tax_code_id:0
+#. module: openforce_account_vat_vop
+msgid "Tax Code"
+msgstr "Codice imposta"
+
+#: help:account.vat.period.end.statement,credit_vat_suspension_account_line_ids:0
+#. module: openforce_account_vat_vop
+msgid "The accounts containing the credit suspension VAT amount "
+msgstr "Linee contenenti gli importi di IVA a Credito in sospensione"
+
+#: help:account.vat.period.end.statement,debit_vat_suspension_account_line_ids:0
+#. module: openforce_account_vat_vop
+msgid "The accounts containing the debit suspension VAT amount"
+msgstr "Linee contenenti gli importi di IVA a Debito in sospensione"
+
+#: view:account.vat.period.end.statement:0
+#. module: openforce_account_vat_vop
+msgid "Total Paid"
+msgstr "Totale Importo Pagato"
+
+#: view:account.vat.period.end.statement:0
+#. module: openforce_account_vat_vop
+msgid "Total Registred"
+msgstr "Totale Importo Registrato"
+
+#: field:statement.credit.suspension.account.line,statement_id:0
+#: field:statement.debit.suspension.account.line,statement_id:0
+#. module: openforce_account_vat_vop
+msgid "VAT statement"
+msgstr "Liquidazione IVA"
+
+#: field:statement.credit.suspension.account.line,line_payment_ids:0
+#: field:statement.debit.suspension.account.line,line_payment_ids:0
+#. module: openforce_account_vat_vop
+msgid "Vat Payment Lines"
+msgstr "Linee IVA su pagamenti"
+
+#: view:account.vat.period.end.statement:0
+#. module: openforce_account_vat_vop
+msgid "Vat Suspension"
+msgstr "IVA in Sospensione"
+
+#: model:ir.model,name:openforce_account_vat_vop.model_account_vat_period_end_statement
+#. module: openforce_account_vat_vop
+msgid "account.vat.period.end.statement"
+msgstr "account.vat.period.end.statement"
+
+#: model:ir.model,name:openforce_account_vat_vop.model_statement_credit_suspension_account_line
+#. module: openforce_account_vat_vop
+msgid "statement.credit.suspension.account.line"
+msgstr "statement.credit.suspension.account.line"
+
+#: model:ir.model,name:openforce_account_vat_vop.model_statement_debit_suspension_account_line
+#. module: openforce_account_vat_vop
+msgid "statement.debit.suspension.account.line"
+msgstr "statement.debit.suspension.account.line"
+

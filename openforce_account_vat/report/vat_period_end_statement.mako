@@ -28,6 +28,13 @@ th {
 	font-size:12px;
 }
 
+h4 {
+	margin-bottom: 2px;
+}
+.section {
+	background-color: lightgrey;
+}
+
 .line_data > td {
 	font-size:12px;
 	padding: 4px;
@@ -38,12 +45,7 @@ th {
 	font-weight:bold;
 	padding: 4px;
 }
-/*
-td {
-	font-size:12px;
-	padding: 4px;
-	border-bottom: 1px solid lightgrey !important;
-}*/
+
 .amount {
 	text-align: right;
 }
@@ -67,23 +69,23 @@ td {
 	## Periods detail
 	## ======================
 	%for period in statement.period_ids:
-		<h3>${ _('Period') + ' ' + period.name}<h3>
+		<h3 class="section">${ _('Periodo') + ' ' + period.name}<h3>
 		## --------------
 		## Purchase
 		## --------------
 		<% ps_tax_codes = [l.tax_code_id.id for l in statement.credit_vat_account_line_ids] %>
 		<% ps_tax_codes_amounts = tax_codes_amounts(period.id, ps_tax_codes) %>
-		<h4>${ _('Purchase')} </h4>
+		<h4>${ _('Acquisti')} </h4>
 		<table class="table table-condensed" >
 		<thead>
            	<tr>
-               	<th style="width:12%;" class="text-left">${ _('Vat code')} </th>
-               	<th style="width:37%;" class="text-left">${ _('Description')} </th>
-               	<th style="width:15%;" class="text-right">${ _('Base')}</th>
-               	<th style="width:12%;" class="text-right">${ _('Vat')}</th>
+               	<th style="width:12%;" class="text-left">${ _('Cod IVA')} </th>
+               	<th style="width:37%;" class="text-left">${ _('Descrizione')} </th>
+               	<th style="width:15%;" class="text-right">${ _('Imponibile')}</th>
+               	<th style="width:12%;" class="text-right">${ _('IVA')}</th>
                	## Columns Deductible / Undeductible only for purchase
-               	<th style="width:12%;" class="text-right">${ _('Deductible')} </th>
-               	<th style="width:12%;" class="text-right">${ _('Undeductible')}  </th>
+               	<th style="width:12%;" class="text-right">${ _('Detraibile')} </th>
+               	<th style="width:12%;" class="text-right">${ _('Indetraibile')}  </th>
         	</tr>
        	</thead>
        	<tbody>
@@ -127,7 +129,7 @@ td {
         	## Print Totals
         	<tr class="line_subtotal">
 				<td></td>
-				<td class="total amount">${ _('Total') }</td>
+				<td class="total amount">${ _('Totale') }</td>
 				<td class="subtotal amount">${ formatLang(total_base)|entity }</td>
 				<td class="subtotal amount">${ formatLang(total_vat)|entity }</td>
 				<td class="subtotal amount">${ formatLang(total_vat_deductible)|entity }</td>
@@ -141,14 +143,14 @@ td {
 		## --------------
 		<% ps_tax_codes = [l.tax_code_id.id for l in statement.debit_vat_account_line_ids] %>
 		<% ps_tax_codes_amounts = tax_codes_amounts(period.id, ps_tax_codes) %>
-		<h4>${ _('Sale')} </h4>
+		<h4>${ _('Vendite')} </h4>
 		<table class="table table-condensed">
 		<thead>
            	<tr>
-               	<th style="width:12%;" class="text-left">${ _('Vat code')} </th>
-               	<th style="width:37%;" class="text-left">${ _('Description')} </th>
-               	<th style="width:15%;" class="amount">${ _('Base')}</th>
-               	<th style="width:12%;" class="amount">${ _('Vat')}</th>
+               	<th style="width:12%;" class="text-left">${ _('Cod IVA')} </th>
+               	<th style="width:37%;" class="text-left">${ _('Descrizione')} </th>
+               	<th style="width:15%;" class="text-right">${ _('Imponibile')}</th>
+               	<th style="width:12%;" class="text-right">${ _('IVA')}</th>
                	## Columns Deductible / Undeductible only for purchase
                	<th style="width:12%;" class="amount"> </th>
                	<th style="width:12%;" class="amount"> </th>
@@ -186,7 +188,7 @@ td {
         	## Print Totals
         	<tr class="line_subtotal">
 				<td></td>
-				<td class="total amount">${ _('Total') }</td>
+				<td class="total amount">${ _('Totale') }</td>
 				<td class="subtotal amount">${ formatLang(total_base)|entity }</td>
 				<td class="subtotal amount">${ formatLang(total_vat)|entity }</td>
 				<td class="subtotal amount"></td>
@@ -199,17 +201,17 @@ td {
 		## Purchase - Suspension
 		## --------------
 		%if 'credit_vat_suspension_account_line_ids' in statement:
-		<h4>${ _('Purchase Suspension')} </h4>
+		<h4>${ _('Acquisti in Sospensione')} </h4>
 		<table class="table table-condensed">
 		<thead>
            	<tr>
-               	<th style="width:12%;" class="text-left">${ _('Vat code')} </th>
-               	<th style="width:37%;" class="text-left">${ _('Description')} </th>
+               	<th style="width:12%;" class="text-left">${ _('Cod IVA')} </th>
+               	<th style="width:37%;" class="text-left">${ _('Descrizione')} </th>
                	<th style="width:15%;" class="amount"> </th>
                	<th style="width:12%;" class="amount"> </th>
                	## Columns Deductible / Undeductible only for purchase
-               	<th style="width:12%;" class="amount">${ _('Amount Registred')} </th>
-               	<th style="width:12%;" class="amount">${ _('Amount Paid')} </th>
+               	<th style="width:12%;" class="amount">${ _('IVA Registrata')} </th>
+               	<th style="width:12%;" class="amount">${ _('IVA Pagamenti')} </th>
         	</tr>
        	</thead>
        	<tbody>
@@ -235,7 +237,7 @@ td {
         	## Print Totals
         	<tr class="line_subtotal">
 				<td></td>
-				<td class="total amount">${ _('Total') }</td>
+				<td class="total amount">${ _('Totale') }</td>
 				<td class="subtotal amount"></td>
 				<td class="subtotal amount"></td>
 				<td class="subtotal amount">${ formatLang(total_registred)|entity }</td>
@@ -249,17 +251,17 @@ td {
 		## Sale - Suspension
 		## --------------
 		%if 'debit_vat_suspension_account_line_ids' in statement:
-		<h4>${ _('Sale Suspension')} </h4>
+		<h4>${ _('Vendite in Sospensione')} </h4>
 		<table class="table table-condensed">
 		<thead>
            	<tr>
-               	<th style="width:12%;" class="text-left">${ _('Vat code')} </th>
-               	<th style="width:37%;" class="text-left">${ _('Description')} </th>
+               	<th style="width:12%;" class="text-left">${ _('Cod IVA')} </th>
+               	<th style="width:37%;" class="text-left">${ _('Descrizione')} </th>
                	<th style="width:15%;" class="amount"> </th>
                	<th style="width:12%;" class="amount"> </th>
                	## Columns Deductible / Undeductible only for purchase
-               	<th style="width:12%;" class="amount">${ _('Amount Registred')} </th>
-               	<th style="width:12%;" class="amount">${ _('Amount Paid')} </th>
+               	<th style="width:12%;" class="amount">${ _('IVA Registrata')} </th>
+               	<th style="width:12%;" class="amount">${ _('IVA Pagamenti')} </th>
         	</tr>
        	</thead>
        	<tbody>
@@ -288,7 +290,7 @@ td {
         	## Print Totals
         	<tr class="line_subtotal">
 				<td></td>
-				<td class="total amount">${ _('Total') }</td>
+				<td class="total amount">${ _('Totale') }</td>
 				<td class="subtotal amount"></td>
 				<td class="subtotal amount"></td>
 				<td class="subtotal amount">${ formatLang(total_registred)|entity }</td>
@@ -305,7 +307,7 @@ td {
 	## ======================
 	## Total Statement
 	## ======================   
-	<h3>${ _('Total Statement') }</h3>
+	<h3 class="section">${ _('Totale Liquidazione') }</h3>
 	<table class="table table-condensed">
 		## Reset Totals
        	<% total_statement = 0 %>
@@ -316,7 +318,7 @@ td {
 		<% vat_accounts = account_vat_amounts('debit', statement.debit_vat_account_line_ids) %>
 		%for account_id in vat_accounts :
 			<tr class="line_data">
-	        	<td class="amount" style="width:50%;">${ _('Debit vat') }</td>
+	        	<td class="amount" style="width:50%;">${ _('IVA a Debito') }</td>
 	        	<td class="amount" style="width:30%;">${ vat_accounts[account_id]['account_name'] }</td>
 	            <td class="amount">${ formatLang(vat_accounts[account_id]['amount'])|entity }</td>
 	        </tr>
@@ -329,7 +331,7 @@ td {
 		<% vat_accounts = account_vat_amounts('credit', statement.credit_vat_account_line_ids) %>
 		%for account_id in vat_accounts :
 			<tr class="line_data">
-	        	<td class="amount" style="width:50%;">${ _('Credit vat') }</td>
+	        	<td class="amount" style="width:50%;">${ _('IVA a Credito') }</td>
 	        	<td class="amount" style="width:30%;">${ vat_accounts[account_id]['account_name'] }</td>
 	            <td class="amount">${ formatLang(vat_accounts[account_id]['amount'])|entity }</td>
 	        </tr>
@@ -341,7 +343,7 @@ td {
 		##----------------------
 		<tr class="line_subtotal">
 	        	<td class="amount" style="width:50%;"></td>
-	        	<td class="amount" style="width:30%;">${ _('Total Statement') }</td>
+	        	<td class="amount" style="width:30%;">${ _('Totale Liquidazione') }</td>
 	            <td class="amount">${ formatLang(total_statement)|entity }</td>
 	    </tr>
 	</table>
@@ -356,7 +358,7 @@ td {
 		## Previous Credit
 		##----------------------
 		<tr class="line_data">
-	        	<td class="amount" style="width:80%;">${ _('Previous credit vat') }</td>
+	        	<td class="amount" style="width:80%;">${ _('Crediti IVA Precedenti') }</td>
 	            <td class="amount">${ formatLang(statement.previous_credit_vat_amount)|entity }</td>
 	    </tr>
        	## Sum total
@@ -365,7 +367,7 @@ td {
 		## Previous Debit
 		##----------------------
 		<tr class="line_data">
-	        	<td class="amount" style="width:80%;">${ _('Previous debit vat') }</td>
+	        	<td class="amount" style="width:80%;">${ _('Debiti IVA Precedenti') }</td>
 	            <td class="amount">${ formatLang(statement.previous_debit_vat_amount)|entity }</td>
 	    </tr>
        	## Sum total
@@ -373,30 +375,32 @@ td {
 	    ##----------------------
 		## Other tot debit/credit
 		##----------------------
+		## In generic vat lines, credits are positive and debits are negative
 		%for generic_vat in statement.generic_vat_account_line_ids :
 			## Prepare description for generic line
 			<% line_generic_description =  generic_vat.account_id.name %> 
+			<% line_generic_amount =  (-1 * generic_vat.amount) %> 
 			%if generic_vat.description:
 				<% line_generic_description = generic_vat.description %>
 			%endif
 			<tr class="line_data">
 	        	<td class="amount" style="width:80%;">${ line_generic_description }</td>
-	            <td class="amount">${ formatLang(generic_vat.amount)|entity }</td>
+	            <td class="amount">${ formatLang(line_generic_amount)|entity }</td>
 	    	</tr>
        		## Sum total
-	    	<% total_to_pay = total_to_pay + generic_vat.amount %>
+	    	<% total_to_pay = total_to_pay + line_generic_amount %>
 	    %endfor
 	    ##----------------------
 		## Total to pay
 		##----------------------
 		%if total_to_pay >= 0:
 			<tr class="line_subtotal">
-	        	<td class="amount" style="width:80%;">${ _('Total To Pay') }</td>
+	        	<td class="amount" style="width:80%;">${ _('Totale da Versare') }</td>
 	            <td class="amount">${ formatLang(total_to_pay)|entity }</td>
 	    	</tr>
 	    %else:
 	    	<tr class="line_subtotal">
-	        	<td class="amount" style="width:80%;">${ _('Total Credit') }</td>
+	        	<td class="amount" style="width:80%;">${ _('Totale a Credito') }</td>
 	            <td class="amount">${ formatLang( (-1 * total_to_pay))|entity }</td>
 	    	</tr>
 	    %endif

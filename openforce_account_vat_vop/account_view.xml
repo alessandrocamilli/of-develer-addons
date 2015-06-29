@@ -11,7 +11,7 @@
             <field name="inherit_id" ref="account_vat_period_end_statement.view_account_vat_period_end_statement"/>
             <field name="arch" type="xml">
                 
-                <xpath expr="//page[@string='Tax Authority']" position="after">
+                <xpath expr="//page[@string='Tax Authority']" position="before">
                 		<page string="Vat Suspension">
                 			<group>
                 				<group>

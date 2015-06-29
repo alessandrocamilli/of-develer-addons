@@ -88,7 +88,7 @@ thead{
             auto="False"
             id="openforce_account_vat.print_vat_period_end_statement"
             model="account.vat.period.end.statement"
-            name="account.print.vat.period.end.statement_openforce_vat"
+            name="statement_openforce_vat"
             file="openforce_account_vat/report/vat_period_end_statement.mako"
             string="VAT Statement Summary"
             webkit_header = "openforce_account_vat.of_ir_header_webkit_vat_period_end_statement"

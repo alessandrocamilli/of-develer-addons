@@ -34,12 +34,12 @@
     'license': 'AGPL-3',
     "depends" : ['account', 
                  'account_vat_period_end_statement', 
-                 #'openforce_account_vat_prorata'
+                 'report_webkit'
                  ],
     "data" : [
-              'reports.xml',
               'account_view.xml',
-              'res_config_view.xml'
+              'res_config_view.xml',
+              'reports.xml'
         ],
     "demo" : [],
     "active": False,

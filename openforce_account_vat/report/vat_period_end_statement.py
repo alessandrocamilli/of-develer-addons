@@ -24,7 +24,7 @@
 
 import time
 from report import report_sxw
-from tools.translate import _
+from openerp.tools.translate import _
 from openerp.osv import orm
 #from account_vat_period_end_statement.report import vat_period_end_statement
 
@@ -162,7 +162,7 @@ class of_print_vat_period_end_statement(report_sxw.rml_parse):
         return account_amounts
     
     
-report_sxw.report_sxw('report.account.print.vat.period.end.statement_openforce_vat',
+report_sxw.report_sxw('report.statement_openforce_vat',
                       'account.vat.period.end.statement',
                       'addons/openforce_account_vat/report/vat_period_end_statement.mako',
                       parser=of_print_vat_period_end_statement)
