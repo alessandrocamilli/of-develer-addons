@@ -201,13 +201,15 @@ h4 {
 		## Purchase - Suspension
 		## --------------
 		%if 'credit_vat_suspension_account_line_ids' in statement:
+		<% ps_tax_codes = [l.tax_code_id.id for l in statement.credit_vat_suspension_account_line_ids] %>
+		<% ps_tax_codes_amounts = tax_codes_amounts(period.id, ps_tax_codes) %>
 		<h4>${ _('Acquisti in Sospensione')} </h4>
 		<table class="table table-condensed">
 		<thead>
            	<tr>
                	<th style="width:12%;" class="text-left">${ _('Cod IVA')} </th>
                	<th style="width:37%;" class="text-left">${ _('Descrizione')} </th>
-               	<th style="width:15%;" class="amount"> </th>
+               	<th style="width:15%;" class="amount">${ _('Imponibile Registrato')}  </th>
                	<th style="width:12%;" class="amount"> </th>
                	## Columns Deductible / Undeductible only for purchase
                	<th style="width:12%;" class="amount">${ _('IVA Registrata')} </th>
@@ -216,21 +218,24 @@ h4 {
        	</thead>
        	<tbody>
        		## Reset Totals
+       		<% total_base_registred = 0 %>
        		<% total_registred = 0 %>
 			<% total_paid = 0 %>
 			%for line_suspension in statement.credit_vat_suspension_account_line_ids :
 				## Prepare values
+				<% base_registred = ps_tax_codes_amounts[line_suspension.tax_code_id.name]['base'] %>
 				<% amount_registred = line_suspension.amount %>
 				<% amount_paid = line_suspension.paid %>
 				<tr class="line_data">
 					<td>${ line_suspension.tax_code_id.code|entity }</td>
 					<td>${ line_suspension.tax_code_id.name|entity }</td>
-					<td class="amount"></td>
+					<td class="amount">${ formatLang(base_registred)|entity }</td>
 					<td class="amount"></td>
 					<td class="amount">${ formatLang(amount_registred)|entity }</td>
 					<td class="amount">${ formatLang(amount_paid)|entity }</td>
 				</tr>
 				## Sum Totals
+				<% total_base_registred = total_base_registred + base_registred %>
 				<% total_registred = total_registred + amount_registred %>
 				<% total_paid = total_paid + amount_paid %>
         	%endfor
@@ -238,7 +243,7 @@ h4 {
         	<tr class="line_subtotal">
 				<td></td>
 				<td class="total amount">${ _('Totale') }</td>
-				<td class="subtotal amount"></td>
+				<td class="subtotal amount">${ formatLang(total_base_registred)|entity }</td>
 				<td class="subtotal amount"></td>
 				<td class="subtotal amount">${ formatLang(total_registred)|entity }</td>
 				<td class="subtotal amount">${ formatLang(total_paid)|entity }</td>
@@ -251,13 +256,15 @@ h4 {
 		## Sale - Suspension
 		## --------------
 		%if 'debit_vat_suspension_account_line_ids' in statement:
+		<% ps_tax_codes = [l.tax_code_id.id for l in statement.debit_vat_suspension_account_line_ids] %>
+		<% ps_tax_codes_amounts = tax_codes_amounts(period.id, ps_tax_codes) %>
 		<h4>${ _('Vendite in Sospensione')} </h4>
 		<table class="table table-condensed">
 		<thead>
            	<tr>
                	<th style="width:12%;" class="text-left">${ _('Cod IVA')} </th>
                	<th style="width:37%;" class="text-left">${ _('Descrizione')} </th>
-               	<th style="width:15%;" class="amount"> </th>
+               	<th style="width:15%;" class="amount">${ _('Imponibile Registrato')}  </th>
                	<th style="width:12%;" class="amount"> </th>
                	## Columns Deductible / Undeductible only for purchase
                	<th style="width:12%;" class="amount">${ _('IVA Registrata')} </th>
@@ -266,24 +273,28 @@ h4 {
        	</thead>
        	<tbody>
        		## Reset Totals
+       		<% total_base_registred = 0 %>
        		<% total_registred = 0 %>
 			<% total_paid = 0 %>
 			%for line_suspension in statement.debit_vat_suspension_account_line_ids :
 				## Prepare values
+				<% base_registred = ps_tax_codes_amounts[line_suspension.tax_code_id.name]['base'] %>
 				<% amount_registred = line_suspension.amount %>
 				<% amount_paid = line_suspension.paid %>
 				## ... Debits in suspension are negative : in the report will be positive
+				<% base_registred = -1 * base_registred %>
 				<% amount_registred = -1 * amount_registred %>
 				<% amount_paid = -1 * amount_paid %>
 				<tr class="line_data">
 					<td>${ line_suspension.tax_code_id.code|entity }</td>
 					<td>${ line_suspension.tax_code_id.name|entity }</td>
-					<td class="amount"></td>
+					<td class="amount">${ formatLang(base_registred)|entity }</td>
 					<td class="amount"></td>
 					<td class="amount">${ formatLang(amount_registred)|entity }</td>
 					<td class="amount">${ formatLang(amount_paid)|entity }</td>
 				</tr>
 				## Sum Totals
+				<% total_base_registred = total_base_registred + base_registred %>
 				<% total_registred = total_registred + amount_registred %>
 				<% total_paid = total_paid + amount_paid %>
         	%endfor
@@ -291,7 +302,7 @@ h4 {
         	<tr class="line_subtotal">
 				<td></td>
 				<td class="total amount">${ _('Totale') }</td>
-				<td class="subtotal amount"></td>
+				<td class="subtotal amount">${ formatLang(total_base_registred)|entity }</td>
 				<td class="subtotal amount"></td>
 				<td class="subtotal amount">${ formatLang(total_registred)|entity }</td>
 				<td class="subtotal amount">${ formatLang(total_paid)|entity }</td>
