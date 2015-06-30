@@ -1,0 +1,78 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* openforce_account_vat_year
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-30 15:47+0000\n"
+"PO-Revision-Date: 2015-06-30 15:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: field:wizard.year.statement,amount_interest:0
+#. module: openforce_account_vat_year
+msgid "Amount Interest"
+msgstr "Amount Interest"
+
+#: field:wizard.year.statement,amount_paid:0
+#. module: openforce_account_vat_year
+msgid "Amount Paid"
+msgstr "Amount Paid"
+
+#: view:wizard.year.statement:0
+#. module: openforce_account_vat_year
+msgid "Cancel"
+msgstr "Cancella"
+
+#: field:wizard.year.statement,fiscalyear_id:0
+#. module: openforce_account_vat_year
+msgid "Fiscalyear"
+msgstr "Anno Fiscale"
+
+#: field:wizard.year.statement,amount_generic:0
+#. module: openforce_account_vat_year
+msgid "Generic Credit or Debit"
+msgstr "Altri Debiti/Crediti"
+
+#: field:wizard.year.statement,print_page_from:0
+#. module: openforce_account_vat_year
+msgid "Page number from"
+msgstr "Pagina dal NR"
+
+#: field:wizard.year.statement,print_page_year:0
+#. module: openforce_account_vat_year
+msgid "Page number year"
+msgstr "Pagina ANNO"
+
+#: view:wizard.year.statement:0
+#. module: openforce_account_vat_year
+msgid "Print"
+msgstr "Stampa"
+
+#: view:wizard.year.statement:0
+#. module: openforce_account_vat_year
+msgid "Print VAT Year End Statment"
+msgstr "Stampa Annuale IVA"
+
+#: model:ir.actions.act_window,name:openforce_account_vat_year.act_wizard_year_statement
+#: model:ir.ui.menu,name:openforce_account_vat_year.menu_year_vat_statement
+#. module: openforce_account_vat_year
+msgid "Print Vat Year End Statement"
+msgstr "Stampa Annuale IVA"
+
+#: model:ir.actions.report.xml,name:openforce_account_vat_year.print_year_vat_period_end_statement
+#. module: openforce_account_vat_year
+msgid "Year VAT Statement Summary"
+msgstr "Stampa Annuale IVA"
+
+#: model:ir.model,name:openforce_account_vat_year.model_wizard_year_statement
+#. module: openforce_account_vat_year
+msgid "wizard.year.statement"
+msgstr "wizard.year.statement"
+
