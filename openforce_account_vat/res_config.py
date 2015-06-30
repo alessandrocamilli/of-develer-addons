@@ -46,12 +46,34 @@ class openfoce_config_setting(osv.osv_memory):
     }
     
     def onchange_company_id(self, cr, uid, ids, company_id, context=None):
-        # update related fields
-        values = {}
-        
-        return values
+        res = super(openfoce_config_setting, self).onchange_company_id(cr, uid, ids, company_id, context=context)
+        if company_id:
+            company = self.pool.get('res.company').browse(cr, uid, company_id, context=context)
+            res['value'].update({
+                'of_account_end_vat_statement_interest': (
+                    company.of_account_end_vat_statement_interest
+                    or False), 
+                'of_account_end_vat_statement_interest_percent': (
+                    company.of_account_end_vat_statement_interest_percent
+                    or False),
+                'of_account_end_vat_statement_interest_account_id': (
+                    company.of_account_end_vat_statement_interest_account_id
+                    and company.of_account_end_vat_statement_interest_account_id.id 
+                    or False),
+                'of_account_end_vat_statement_print_all_tax': (
+                    company.of_account_end_vat_statement_print_all_tax
+                    or False),
+                })
+        else: 
+            res['value'].update({
+                'of_account_end_vat_statement_interest': 0, 
+                'of_account_end_vat_statement_interest_percent': 0,
+                'of_account_end_vat_statement_interest_account_id': False,
+                'of_account_end_vat_statement_print_all_tax': False
+                })
+        return res
     
-    def get_default_account_vat(self, cr, uid, fields, context=None):
+    def get_of_default_account_vat(self, cr, uid, fields, context=None):
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
         return {
             'of_account_end_vat_statement_interest': user.company_id.of_account_end_vat_statement_interest,
@@ -59,7 +81,7 @@ class openfoce_config_setting(osv.osv_memory):
             'of_account_end_vat_statement_interest_account_id': user.company_id.of_account_end_vat_statement_interest_account_id.id,
             'of_account_end_vat_statement_print_all_tax': user.company_id.of_account_end_vat_statement_print_all_tax,
         }
-    def set_default_account_vat(self, cr, uid, ids, context=None):
+    def set_of_default_account_vat(self, cr, uid, ids, context=None):
         config = self.browse(cr, uid, ids[0], context)
         user = self.pool.get('res.users').browse(cr, uid, uid, context)
         user.company_id.write({
