@@ -34,6 +34,7 @@
                  'account_vat_period_end_statement', 
                  ],
     "data" : [
+            'security/ir.model.access.csv',
             'account_view.xml'
         ],
     "demo" : [],
