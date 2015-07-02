@@ -24,6 +24,7 @@ from openerp.osv import orm, fields
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 from openerp import netsvc
+from collections import Counter
 
 '''
 class statement_generic_account_line(orm.Model):
@@ -35,25 +36,44 @@ class account_tax_code(orm.Model):
     _inherit = "account.tax.code"
     
     def _get_lines_vat_on_payment(self, cr, uid, ids, context):
+        period_obj = self.pool['account.period']
         res = []
         if context is None:
             context = {}
         move_state = ('posted', )
         if context.get('state', False) == 'all':
             move_state = ('draft', 'posted', )
+        period_id = False
         if context.get('period_id', False):
             period_id = context['period_id']
+        fiscalyear_id = False
+        if context.get('fiscalyear_id', False):
+            fiscalyear_id = context['fiscalyear_id']
         # Without where passing, setting params from context 
         where = ''
         where_params = []
         if period_id:
             where += ' AND line.period_id=%s '
             where_params.append(period_id)
+        if not period_id and fiscalyear_id:
+            domain = [('fiscalyear_id', '=', fiscalyear_id)]
+            period_ids = period_obj.search(cr, uid, domain)
+            if period_ids:
+                where += ' AND line.period_id IN %s '
+                where_params.append(tuple(period_ids))
         if move_state:
             where += ' AND move.state IN %s '
             where_params.append(move_state)
+        ## debug
+        w_test = where          
+        ##
         where_params = tuple(where_params)
         parent_ids = tuple(self.search(cr, uid, [('parent_id', 'child_of', ids)]))
+        ######## >>> debug
+        #print ids
+        #import pdb
+        #pdb.set_trace()
+        ######## <<< debug
         for tax_code_id in parent_ids:
             cr.execute('SELECT line.id AS line_id \
                     FROM account_move_line AS line, \
@@ -77,7 +97,33 @@ class account_tax_code(orm.Model):
         the amounts with new policy for only lines of payments.
         '''
         tax_code_obj = self.pool['account.tax.code']
-        res = super(account_tax_code, self)._sum(cr, uid, ids, name, args, context, where, where_params)
+        res = {}
+        if 'fiscalyear_ids' in context:
+            fiscalyear_ids = context.get('fiscalyear_ids')
+            where = ''
+            where_params = ()
+            pids = []
+            for fiscalyear in self.pool.get('account.fiscalyear').browse(cr, uid, fiscalyear_ids):
+                context.update({'fiscalyear_id' : fiscalyear.id})
+                pids += map(lambda x: str(x.id), fiscalyear.period_ids)
+            if pids:
+                move_state = ('posted', )
+                if context.get('state', 'all') == 'all':
+                    move_state = ('draft', 'posted', )
+                where = ' AND line.period_id IN %s AND move.state IN %s '
+                where_params = (tuple(pids), move_state)
+                #import pdb
+                #pdb.set_trace()
+                res = super(account_tax_code, self)._sum(cr, uid, ids, name, args, context, where, where_params)
+                '''for tax_id in res_year:
+                    if tax_id in res:
+                        res[tax_id] += res_year[tax_id]
+                    else:
+                        res.update({tax_id: res_year[tax_id]})'''
+                
+                #res = Counter(res) + Counter(res_year)
+        else:
+            res = super(account_tax_code, self)._sum(cr, uid, ids, name, args, context, where, where_params)
         
         if context.get('based_on', 'invoices') == 'vat_on_payment':
             parent_ids = tuple(self.search(cr, uid, [('parent_id', 'child_of', ids)]))
@@ -99,18 +145,7 @@ class account_tax_code(orm.Model):
                                     WHERE line.id IN %s \
                                     GROUP BY line.tax_code_id',(lines_paid,))
                     res=dict(cr.fetchall())
-                '''
-                cr.execute('SELECT line.tax_code_id, sum(line.tax_amount) \
-                    FROM account_move_line AS line, \
-                        account_move AS move \
-                        LEFT JOIN account_invoice invoice ON \
-                            (invoice.move_id = move.id) \
-                    WHERE line.tax_code_id IN %s '+where+' \
-                        AND move.id = line.move_id \
-                        AND invoice.id IS NULL \
-                            GROUP BY line.tax_code_id',
-                                (parent_ids,) + where_params)
-                                '''
+                
                 obj_precision = self.pool.get('decimal.precision')
                 res2 = {}
                 for record in self.browse(cr, uid, ids, context=context):
@@ -122,6 +157,7 @@ class account_tax_code(orm.Model):
                     res2[record.id] = round(_rec_get(record), obj_precision.precision_get(cr, uid, 'Account'))
                 return res2
         return res
+    
     
 class account_vat_period_end_statement(orm.Model):
     _inherit = "account.vat.period.end.statement"

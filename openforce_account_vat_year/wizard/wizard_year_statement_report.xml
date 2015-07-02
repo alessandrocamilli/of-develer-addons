@@ -11,7 +11,10 @@
                         <field name="fiscalyear_id" on_change="on_change_fiscalyear_id(fiscalyear_id)"/>
                     </group>
                     <group>
+	                    <field name="amount_previous_credit"/>
+	                    <field name="amount_previous_debit"/>
 	                    <field name="amount_generic"/>
+	                    <field name="amount_paid_on_statement"/>
 	                    <field name="amount_paid"/>
                     </group>
                     <group>

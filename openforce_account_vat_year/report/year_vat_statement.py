@@ -19,10 +19,12 @@
 #
 ##############################################################################
 
-
+from openerp.osv import orm, fields
+from openerp.tools.translate import _
 import time
 from report import report_sxw
 from operator import itemgetter
+import openerp.addons.decimal_precision as dp
 
 class Parser(report_sxw.rml_parse):
     
@@ -33,6 +35,7 @@ class Parser(report_sxw.rml_parse):
         self.localcontext.update({
             'time': time,
             'tax_codes_amounts': self._get_tax_codes_amounts,
+            'tax_codes_amounts_suspension': self._get_tax_codes_amounts_suspension,
             'lines_generic_amounts': self._get_lines_generic_amounts,
             'year': self.get_year,
             'amount_generic': self.get_amount_generic,
@@ -87,12 +90,6 @@ class Parser(report_sxw.rml_parse):
         if context is None:
             context = {}
         tax_pool = self.pool['account.tax']
-        '''
-        if tax_code.sum:
-            if res.get(tax_code.name, False):
-                raise orm.except_orm(
-                    _('Error'),
-                    _('Too many occurences of tax code %s') % tax_code.name)'''
         # search for taxes linked to that code
         tax_ids = tax_pool.search(
             self.cr, self.uid, [
@@ -129,11 +126,6 @@ class Parser(report_sxw.rml_parse):
                 tax_vals = self._compute_tax_amount(tax, tax_code, base_code, context)
                 res.update(tax_vals)
                 
-            #res[tax_code.name] = {
-            #    'vat': tax_code.sum,
-            #    'base': base_code.sum,
-            #}
-            
         for child_code in tax_code.child_ids:
             res = self._build_codes_dict(
                 child_code, res=res, context=context)
@@ -154,6 +146,65 @@ class Parser(report_sxw.rml_parse):
         for tax_code in code_pool.browse(
                 self.cr, self.uid, tax_code_ids, context=context):
             res = self._build_codes_dict(tax_code, res=res, context=context)
+        return res
+    
+    def _get_tax_codes_amounts_suspension(self, type='credit',
+                               tax_code_ids=None, context={}):
+        tax_code_pool = self.pool['account.tax.code']
+        if tax_code_ids is None:
+            tax_code_ids = tax_code_pool.search(self.cr, self.uid, [
+                ('vat_statement_account_id', '!=', False),
+                ('vat_statement_type', '=', type),
+                ('vat_on_payment_related_tax_code_id', '!=', False),
+                ], context=context)
+        res = {}
+        code_pool = self.pool['account.tax.code']
+        # Fiscalyear from start to required year
+        # Periods from start to 
+        fiscalyear_id = self.localcontext['data']['fiscalyear_id']
+        fiscalyear = self.pool['account.fiscalyear'].browse(self.cr, self.uid, 
+                                                            fiscalyear_id)
+        domain = [('date_stop', '<', fiscalyear.date_start)]
+        fy_ids = self.pool['account.fiscalyear'].search(self.cr, self.uid, 
+                                                        domain)
+        #context['fiscalyear_id'] = self.localcontext['data']['fiscalyear_id']
+        if fy_ids:
+            fy_ids.append(fiscalyear_id)
+        else:
+            fy_ids = [fiscalyear_id]
+        context['fiscalyear_ids'] = fy_ids
+        
+        context['year'] = self.localcontext['data']['year']
+        # Vat suspension registred
+        for tax_code in code_pool.browse(
+                self.cr, self.uid, tax_code_ids, context=context):
+            # Only shadow 
+            if not tax_code.vat_on_payment_related_tax_code_id:
+                    continue
+            tax_code = tax_code.vat_on_payment_related_tax_code_id
+            context['based_on'] = False
+            res = self._build_codes_dict(tax_code, res=res, context=context)
+        # Add Vat suspension paid
+        res_paid ={}
+        total_paid = 0
+        for tax_code in code_pool.browse(
+                self.cr, self.uid, tax_code_ids, context=context):
+            # Only shadow 
+            if not tax_code.vat_on_payment_related_tax_code_id:
+                    continue
+            tax_code = tax_code.vat_on_payment_related_tax_code_id
+            context['based_on'] = 'vat_on_payment'
+            total_paid = tax_code_pool.browse(self.cr, self.uid, tax_code.id, context).sum
+            if total_paid:
+                if tax_code.name in res:
+                    res[tax_code.name]['paid'] = total_paid
+                else:
+                    res.update({tax_code.name: {'paid': total_paid, 
+                                                'code':  tax_code.code,
+                                                'base':  0,
+                                                'vat':  0
+                                                }
+                                })
         return res
     
     def _get_period(self, statement, context={}):

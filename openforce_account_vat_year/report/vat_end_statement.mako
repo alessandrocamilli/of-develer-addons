@@ -55,6 +55,13 @@ h4 {
 	## Tax Details 
 	## ======================  
     <% total = {'credit': 0.0, 'debit': 0.0} %>
+	<% total_suspension_credit_base = 0 %>
+	<% total_suspension_credit_vat = 0 %>
+	<% total_suspension_credit_vat_paid = 0 %>
+	<% total_suspension_debit_base = 0 %>
+	<% total_suspension_debit_vat = 0 %>
+	<% total_suspension_debit_vat_paid = 0 %>
+	
     %for type in ('credit', 'debit'):
         <h3 class="section">${ type=='credit' and 'Acquisti' or 'Vendite' }</h3>
         <table class="table table-condensed">
@@ -139,12 +146,95 @@ h4 {
                 </tr>
             </tbody>
         </table>
+        ##----------------------------------
+        ## Suspension
+        ##----------------------------------
+		
+        <h3 class="">${ type=='credit' and 'Acquisti in Sospensione' or 'Vendite in Sospensione'}</h3>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:12%;" class="text-left">${ _('Cod IVA')} </th>
+               		<th style="width:37%;" class="text-left">${ _('Descrizione')} </th>
+               		<th style="width:15%;" class="text-right">${ _('Imponibile in Sospensione')}</th>
+               		<th style="width:12%;" class="text-right">${ _('Imposta in Sospensione')}</th>
+               		<th style="width:12%;" class="text-right">${ _("Imposta Pagata nell'anno")} </th>
+               		<th style="width:12%;" class="text-right"></th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            	## Reset Totals
+				<% total_base = 0 %>
+				<% total_tax_code_vat_suspension = 0 %>
+				<% total_tax_code_vat_paid = 0 %>
+                
+                <% taxes = tax_codes_amounts_suspension(type) %>
+                %for tax,vals in taxes.items():
+                
+                ## Prepare Vals
+                <% tax_code_code = vals['code'] %>
+                <% tax_code_base = vals['base'] %>
+				<% tax_code_vat_suspension = vals['vat'] %>
+				<% tax_code_vat_paid = 0 %>
+				%if 'paid' in vals:
+					<% tax_code_vat_paid = vals['paid'] %>
+				%endif
+				## ... Debit : vat paid is negative - vat suspension is positive
+				## ... Credit : vat paid is positive - vat suspension is negative
+				## ... >>> in the report all values will be positive
+				%if type == 'debit':
+					<% tax_code_base = tax_code_base %>
+					<% tax_code_vat_suspension = tax_code_vat_suspension %>
+					<% tax_code_vat_paid = -1 * tax_code_vat_paid %>
+				%else:
+					<% tax_code_base = -1 * tax_code_base %>
+					<% tax_code_vat_suspension = -1 * tax_code_vat_suspension %>
+					<% tax_code_vat_paid = tax_code_vat_paid %>
+				%endif
+                
+				## Print values
+                <tr class="line_data">
+                    <td>${ tax_code_code }</td>
+                    <td>${ tax }</td>
+                    <td class="amount">${ formatLang(tax_code_base)|entity }</td>
+                    <td style="width:12%;" class=" amount">${ formatLang(tax_code_vat_suspension)|entity }</td>
+               		<td style="width:12%;" class=" amount">${ formatLang(tax_code_vat_paid)|entity } </td>
+               		<td class="amount"></td>
+                </tr>
+                ## SUM TOTALS
+                <% total_base += tax_code_base %>
+                <% total_tax_code_vat_suspension += tax_code_vat_suspension %>
+                <% total_tax_code_vat_paid += tax_code_vat_paid %>
+                %if type == 'debit':
+					<% total_suspension_debit_base += tax_code_base %>
+					<% total_suspension_debit_vat += tax_code_vat_suspension %>
+					<% total_suspension_debit_vat_paid += tax_code_vat_paid %>
+				%else:
+					<% total_suspension_credit_base += tax_code_base %>
+					<% total_suspension_credit_vat += tax_code_vat_suspension %>
+					<% total_suspension_credit_vat_paid += tax_code_vat_paid %>
+				%endif
+                
+                %endfor
+                
+        		## Print Totals
+                <tr class="line_subtotal">
+                    <td></td>
+                    <td class="total amount">${ _('Totale in Sospensione') }</td>
+                    <td class="total amount">${ formatLang(total_base)|entity }</td>
+                    <td class="subtotal amount">${ formatLang(total_tax_code_vat_suspension)|entity }</td>
+					<td class="subtotal amount">${ formatLang(total_tax_code_vat_paid)|entity }</td>
+					<td class="total amount"></td>
+                </tr>
+            </tbody>
+        </table>
     %endfor
     
     ## ======================
 	## Total Statement
 	## ======================   
-    <h3 class="section">${ 'Totali'}</h3>
+    <h3 class="section">${ _('Totali')}</h3>
     <% total_end_vat_period = total['debit'] - total['credit'] %>
     ##<table class="table table-bordered table-condensed" style="margin-left:20%;width:80%;">
     <table class="table table-bordered table-condensed" >
@@ -186,8 +276,30 @@ h4 {
         	</tr>	
         %endif
         
-        
         <% total_end_vat_period = total_end_vat_period + total_generic %>
+        
+        ##----------------------------------
+        ## IVA in sospensione
+        ##----------------------------------
+        %if total_suspension_debit_vat or total_suspension_credit_vat:
+        	<tr>
+        		<td colspan="3">Iva in Sospensione</td>
+            	<td class="amount"></td>
+        	</tr>	
+        	<tr class="line_data">
+        		<td></td>
+        		<td style="width:200px;">${ _('Iva a credito in Sospensione') }</td>
+            	<td class="amount">${ formatLang(total_suspension_credit_vat) |entity } </td>
+            	<td></td>
+        	</tr>
+        	<tr class="line_data">
+        		<td></td>
+        		<td style="width:200px;">${ _('Iva a debito in Sospensione') }</td>
+            	<td class="amount">${ formatLang(total_suspension_debit_vat) |entity } </td>
+            	<td></td>
+        	</tr>
+        %endif
+        
         ##----------------------------------
         ## Iva a credito/debito del periodo
         ##----------------------------------

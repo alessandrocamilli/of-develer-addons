@@ -33,7 +33,10 @@ class wizard_year_statement(orm.TransientModel):
         'amount_generic': fields.float('Generic Credit or Debit', 
                                        readonly=True),
         'amount_interest': fields.float('Amount Interest'),
-        'amount_paid': fields.float('Amount Paid'),
+        'amount_previous_credit': fields.float('Amount Previous Credit',  readonly=True),
+        'amount_previous_debit': fields.float('Amount Previous Debit',  readonly=True),
+        'amount_paid_on_statement': fields.float('Amount Paid on Statement',  readonly=True),
+        'amount_paid': fields.float('Amount Paid - ON PRINT'),
         'print_page_from': fields.integer('Page number from'),
         'print_page_year': fields.char('Page number year', size=10),
         }
@@ -52,6 +55,7 @@ class wizard_year_statement(orm.TransientModel):
         
         if not fiscalyear_id:
             return res
+        fiscalyear = self.pool['account.fiscalyear'].browse(cr, uid, fiscalyear_id)
         # Periods competence
         domain = [('fiscalyear_id', '=', fiscalyear_id)]
         period_ids = period_obj.search(cr, uid, domain)
@@ -80,15 +84,33 @@ class wizard_year_statement(orm.TransientModel):
         
         # Statement Paid
         amount_paid = 0
+        amount_paid_on_statement = 0
+        previous_credit = 0
+        previous_debit = 0
         domain = [('state', '=', 'paid')]
         statement_ids = end_statment_vat_obj.search(cr, uid, domain)
-        for statement in end_statment_vat_obj.browse(cr, uid, statement_ids):
+        for statement in end_statment_vat_obj.browse(cr, uid, statements):
             if statement.id not in statements:
                 continue
-            if statement.authority_vat_amount > 0:
-                amount_paid += (statement.authority_vat_amount \
-                                - statement.residual)
-        wiz_val.update({'amount_paid':amount_paid}) 
+            # First period for credit/debit form previous year
+            for p in statement.period_ids:
+                if p.date_start == fiscalyear.date_start:
+                    previous_credit = statement.previous_credit_vat_amount
+                    previous_debit = statement.previous_debit_vat_amount
+            for line in statement.payment_ids:
+                if line.debit:
+                    amount_paid += line.debit
+                else:
+                    amount_paid -= line.credit
+        amount_paid_on_statement = amount_paid
+        amount_paid += previous_credit
+        amount_paid -= previous_debit
+        wiz_val.update({
+                        'amount_previous_credit': previous_credit,
+                        'amount_previous_debit': previous_debit,
+                        'amount_paid_on_statement': amount_paid_on_statement,
+                        'amount_paid': amount_paid,
+                        }) 
         
         res={'value': wiz_val}
         
@@ -104,6 +126,8 @@ class wizard_year_statement(orm.TransientModel):
                       'fiscalyear_id': wizard.fiscalyear_id.id,
                       'amount_generic': wizard.amount_generic,
                       'amount_interest': wizard.amount_interest,
+                      'amount_previous_credit': wizard.amount_previous_credit,
+                      'amount_previous_debit': wizard.amount_previous_debit,
                       'amount_paid': wizard.amount_paid,
                       'year': wizard.fiscalyear_id.name,
                       'print_page_from': wizard.print_page_from,

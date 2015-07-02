@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-30 15:47+0000\n"
-"PO-Revision-Date: 2015-06-30 15:47+0000\n"
+"POT-Creation-Date: 2015-07-02 19:42+0000\n"
+"PO-Revision-Date: 2015-07-02 19:42+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,12 +18,27 @@ msgstr ""
 #: field:wizard.year.statement,amount_interest:0
 #. module: openforce_account_vat_year
 msgid "Amount Interest"
-msgstr "Amount Interest"
+msgstr "Importo Interessi"
 
 #: field:wizard.year.statement,amount_paid:0
 #. module: openforce_account_vat_year
-msgid "Amount Paid"
-msgstr "Amount Paid"
+msgid "Amount Paid - ON PRINT"
+msgstr "Totale Versato"
+
+#: field:wizard.year.statement,amount_paid_on_statement:0
+#. module: openforce_account_vat_year
+msgid "Amount Paid on Statement"
+msgstr "Versato nel Periodo"
+
+#: field:wizard.year.statement,amount_previous_credit:0
+#. module: openforce_account_vat_year
+msgid "Amount Previous Credit"
+msgstr "IVA a Credito Periodo Precedente"
+
+#: field:wizard.year.statement,amount_previous_debit:0
+#. module: openforce_account_vat_year
+msgid "Amount Previous Debit"
+msgstr "IVA a Debito Periodo Precedente"
 
 #: view:wizard.year.statement:0
 #. module: openforce_account_vat_year
@@ -58,7 +73,7 @@ msgstr "Stampa"
 #: view:wizard.year.statement:0
 #. module: openforce_account_vat_year
 msgid "Print VAT Year End Statment"
-msgstr "Stampa Annuale IVA"
+msgstr "Stampa liquidazione IVA annuale"
 
 #: model:ir.actions.act_window,name:openforce_account_vat_year.act_wizard_year_statement
 #: model:ir.ui.menu,name:openforce_account_vat_year.menu_year_vat_statement
