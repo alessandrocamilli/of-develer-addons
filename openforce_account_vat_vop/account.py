@@ -189,7 +189,8 @@ class account_vat_period_end_statement(orm.Model):
                 ###
                 print line.tax_code_id.vat_on_payment_related_tax_code_id.name
                 ###
-                if not line.tax_code_id.vat_on_payment_related_tax_code_id:
+                if not line.tax_code_id.vat_on_payment_related_tax_code_id\
+                        or line.tax_code_id.vat_on_payment_related_tax_code_id.id == line.tax_code_id.id:
                     continue
                 tax_code = line.tax_code_id.vat_on_payment_related_tax_code_id
                 total = 0.0

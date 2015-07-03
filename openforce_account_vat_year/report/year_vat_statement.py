@@ -179,7 +179,8 @@ class Parser(report_sxw.rml_parse):
         for tax_code in code_pool.browse(
                 self.cr, self.uid, tax_code_ids, context=context):
             # Only shadow 
-            if not tax_code.vat_on_payment_related_tax_code_id:
+            if not tax_code.vat_on_payment_related_tax_code_id\
+                or tax_code.vat_on_payment_related_tax_code_id.id == tax_code.id:
                     continue
             tax_code = tax_code.vat_on_payment_related_tax_code_id
             context['based_on'] = False
@@ -190,7 +191,8 @@ class Parser(report_sxw.rml_parse):
         for tax_code in code_pool.browse(
                 self.cr, self.uid, tax_code_ids, context=context):
             # Only shadow 
-            if not tax_code.vat_on_payment_related_tax_code_id:
+            if not tax_code.vat_on_payment_related_tax_code_id\
+                or tax_code.vat_on_payment_related_tax_code_id.id == tax_code.id:
                     continue
             tax_code = tax_code.vat_on_payment_related_tax_code_id
             context['based_on'] = 'vat_on_payment'

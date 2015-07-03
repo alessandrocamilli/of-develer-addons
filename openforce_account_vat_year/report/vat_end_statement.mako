@@ -328,6 +328,7 @@ h4 {
             	<td class="total">Totale IVA Da Versare</td>
         	%else:
         		<td class="total">Totale IVA A Credito</td>
+        		<% total_to_pay = -1 * total_to_pay %>
         	%endif
             <td style="width:50%;" class="total amount">${ formatLang(total_to_pay)|entity } </td>
         </tr>
