@@ -25,7 +25,6 @@ from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 from openerp import netsvc
 
-
 class account_tax_code(orm.Model):
     _inherit = "account.tax.code"
     _columns = {
@@ -128,7 +127,6 @@ class account_invoice(orm.Model):
         '''
         reconcile_obj = self.pool['account.move.reconcile']
         move_obj = self.pool['account.move']
-        
         for inv in self.browse(cr, uid, ids):
             if not inv.split_payment_move_id:
                 continue
@@ -140,6 +138,9 @@ class account_invoice(orm.Model):
                     recs += [split_line.reconcile_partial_id.id]
             if recs:
                 reconcile_obj.unlink(cr, uid, recs)
+            # If posted move, reset to draft
+            if inv.split_payment_move_id.state not in ['draft']:
+                move_obj.button_cancel(cr, uid, [inv.split_payment_move_id.id])
             move_obj.unlink(cr, uid, inv.split_payment_move_id.id)
         
         return super(account_invoice, self).action_cancel(cr, uid, 
