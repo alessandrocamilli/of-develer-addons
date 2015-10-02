@@ -70,7 +70,7 @@
     /* COLUMNS WIDTH 
     .p_cell_progr_row { width: 15px;}
     .p_cell_date { width: 45px;}
-    .p_cell_ref { width: 70px;}
+    .p_cell_ref { width: 100px;}
     .p_cell_move_id_name { width: 70px;}
     .p_cell_account_id_code { width: 50px;}
     .p_cell_account_id_name { width: 200px;}
