@@ -26,7 +26,7 @@
     .p_text {
         color: black;
         font-size: 9px;
-        font-family: "Courier New", Courier, monospace;
+        /*font-family: "Courier New", Courier, monospace;*/
         }
     .p_cell_debit, .p_cell_credit {
         text-align: right;
