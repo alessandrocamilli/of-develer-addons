@@ -23,5 +23,23 @@
             </field>
         </record>
         
+<<<<<<< HEAD
+=======
+        
+        <!--
+        JOURNAL
+         -->
+        <record id="view_central_journal_account_journal_form" model="ir.ui.view">
+            <field name="name">view.central.journal.account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='centralisation']" position="before">
+                    <field name="central_journal_exclude"/>
+           		</xpath>
+            </field>
+		</record>
+        
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
      </data>
 </openerp>

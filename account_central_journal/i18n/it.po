@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 msgid ""
 msgstr ""
 "Project-Id-Version: Account Central Journal\n"
@@ -9,6 +10,24 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+=======
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_central_journal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-02 10:18+0000\n"
+"PO-Revision-Date: 2015-10-02 10:18+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: model:ir.actions.act_window,name:account_central_journal.central_journal_report_action
 #: model:ir.ui.menu,name:account_central_journal.menu_central_journal_report_action
@@ -16,6 +35,7 @@ msgstr ""
 msgid "Print Central Journal"
 msgstr "Stampa Libro Giornale"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:135
 #. module: account_central_journal
 msgid "Account code"
@@ -28,11 +48,28 @@ msgid "Progressives =>"
 msgstr "Progressivi =>"
 
 #: model:ir.model,name:account_central_journal.model_central_journal_report
+=======
+#: report:addons/account_central_journal/report/central_journal_report.mako:139
+#. module: account_central_journal
+msgid "Account code"
+msgstr "Account code"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:148
+#: report:addons/account_central_journal/report/central_journal_report.mako:174
+#. module: account_central_journal
+msgid "Progressives =>"
+msgstr "Progressives =>"
+
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 #: model:ir.model,name:account_central_journal.model_wizard_central_journal_report
 #: view:wizard.central.journal.report:0
 #. module: account_central_journal
 msgid "Printing parameters of the Center Journal"
+<<<<<<< HEAD
 msgstr "Parametri di stampa del Giornale Centralizzato"
+=======
+msgstr "Parametri di stampa del Libro Giornale"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: field:wizard.central.journal.report,print_state:0
 #. module: account_central_journal
@@ -44,6 +81,7 @@ msgstr "Stato"
 msgid "Draft"
 msgstr "Bozza"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:134
 #. module: account_central_journal
 msgid "Account move"
@@ -53,6 +91,17 @@ msgstr "Movimento"
 #. module: account_central_journal
 msgid "Debit"
 msgstr "Dare"
+=======
+#: report:addons/account_central_journal/report/central_journal_report.mako:138
+#. module: account_central_journal
+msgid "Account move"
+msgstr "Account move"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:142
+#. module: account_central_journal
+msgid "Debit"
+msgstr "Debit"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: view:wizard.central.journal.report:0
 #. module: account_central_journal
@@ -64,6 +113,7 @@ msgstr "Stampa"
 msgid "Progressive Credit"
 msgstr "Progressivo Avere"
 
+<<<<<<< HEAD
 #: model:ir.module.module,description:account_central_journal.module_meta_information
 #. module: account_central_journal
 msgid ""
@@ -81,6 +131,27 @@ msgstr "Errore! Non è possibile definire una sovrapposizione degli anni fiscali
 #. module: account_central_journal
 msgid "Ref"
 msgstr "Rif."
+=======
+#: field:wizard.central.journal.report,target_move:0
+#. module: account_central_journal
+msgid "Target Move"
+msgstr "Target Move"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:137
+#. module: account_central_journal
+msgid "Ref"
+msgstr "Ref"
+
+#: model:ir.model,name:account_central_journal.model_account_journal
+#. module: account_central_journal
+msgid "Journal"
+msgstr "Sezionale"
+
+#: field:account.journal,central_journal_exclude:0
+#. module: account_central_journal
+msgid "Exclude from Central             Journal"
+msgstr "Escludi dalla stampa del Libro Giornale"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: field:account.fiscalyear,date_last_print:0
 #. module: account_central_journal
@@ -92,6 +163,7 @@ msgstr "Data ultima stampa"
 msgid "Printed"
 msgstr "Stampato"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:136
 #. module: account_central_journal
 msgid "Account name"
@@ -101,6 +173,17 @@ msgstr "Conto"
 #. module: account_central_journal
 msgid "Date"
 msgstr "Data"
+=======
+#: report:addons/account_central_journal/report/central_journal_report.mako:140
+#. module: account_central_journal
+msgid "Account name"
+msgstr "Account name"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:136
+#. module: account_central_journal
+msgid "Date"
+msgstr "Date"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: code:addons/account_central_journal/wizard/central_journal_report.py:51
 #: code:addons/account_central_journal/wizard/central_journal_report.py:54
@@ -119,6 +202,7 @@ msgstr "Date dei movimenti"
 msgid "Progressive Debit"
 msgstr "Progressivo Dare"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:124
 #: field:wizard.central.journal.report,date_move_line_to:0
 #. module: account_central_journal
@@ -134,6 +218,17 @@ msgstr "Descrizione movimento"
 #. module: account_central_journal
 msgid "Account Central Journal"
 msgstr "Libro Giornale"
+=======
+#: selection:wizard.central.journal.report,target_move:0
+#. module: account_central_journal
+msgid "Posted"
+msgstr "Registrazioni confermate"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:141
+#. module: account_central_journal
+msgid "Name"
+msgstr "Name"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: field:account.fiscalyear,progressive_line_number:0
 #. module: account_central_journal
@@ -146,10 +241,17 @@ msgstr "Progressivo della riga"
 msgid "The end date can not be greater than today's date."
 msgstr "La data finale non può essere maggiore della data odierna"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:139
 #. module: account_central_journal
 msgid "Credit"
 msgstr "Avere"
+=======
+#: report:addons/account_central_journal/report/central_journal_report.mako:143
+#. module: account_central_journal
+msgid "Credit"
+msgstr "Credit"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: model:ir.model,name:account_central_journal.model_account_fiscalyear
 #: field:wizard.central.journal.report,fiscalyear:0
@@ -157,10 +259,22 @@ msgstr "Avere"
 msgid "Fiscal Year"
 msgstr "Anno Fiscale"
 
+<<<<<<< HEAD
 #: constraint:account.fiscalyear:0
 #. module: account_central_journal
 msgid "Error! The duration of the Fiscal Year is invalid. "
 msgstr "Errore! La durata dell'anno fiscale non è valida."
+=======
+#: view:wizard.central.journal.report:0
+#. module: account_central_journal
+msgid "Options"
+msgstr "Opzioni"
+
+#: selection:wizard.central.journal.report,target_move:0
+#. module: account_central_journal
+msgid "All"
+msgstr "Tutte le registrazioni"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: code:addons/account_central_journal/wizard/central_journal_report.py:51
 #. module: account_central_journal
@@ -176,21 +290,33 @@ msgstr "Riferimento"
 #: model:ir.actions.report.xml,name:account_central_journal.central_journal_report_id
 #. module: account_central_journal
 msgid "central_journal"
+<<<<<<< HEAD
 msgstr "Libro Giornale Report Webkit"
+=======
+msgstr "Stampa Libro Giornale Webkit"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: field:account.fiscalyear,progressive_page_number:0
 #. module: account_central_journal
 msgid "Progressive of the page"
 msgstr "Progressivo della pagina"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:124
 #. module: account_central_journal
 msgid "TEST PRINTING"
 msgstr "STAMPA DI PROVA"
+=======
+#: report:addons/account_central_journal/report/central_journal_report.mako:128
+#. module: account_central_journal
+msgid "TEST PRINTING"
+msgstr "TEST PRINTING"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: view:account.fiscalyear:0
 #. module: account_central_journal
 msgid "Central journal info"
+<<<<<<< HEAD
 msgstr "Informazione del Giornale Centralizzato"
 
 #: report:report.central_journal_report:127
@@ -199,6 +325,16 @@ msgid "Page:"
 msgstr "Pagina:"
 
 #: report:report.central_journal_report:124
+=======
+msgstr "Informazione del Libro Giornale"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:131
+#. module: account_central_journal
+msgid "Page:"
+msgstr "Page:"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:128
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 #: field:wizard.central.journal.report,date_move_line_from:0
 #: field:wizard.central.journal.report,date_move_line_from_view:0
 #. module: account_central_journal
@@ -215,18 +351,38 @@ msgstr "Pronto per la stampa"
 msgid "Cancel"
 msgstr "Annulla"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:131
 #. module: account_central_journal
 msgid "Row"
 msgstr "N.riga"
+=======
+#: report:addons/account_central_journal/report/central_journal_report.mako:135
+#. module: account_central_journal
+msgid "Row"
+msgstr "Row"
+
+#: report:addons/account_central_journal/report/central_journal_report.mako:128
+#: field:wizard.central.journal.report,date_move_line_to:0
+#. module: account_central_journal
+msgid "to date"
+msgstr "alla data"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 
 #: view:wizard.central.journal.report:0
 #. module: account_central_journal
 msgid "Final print"
 msgstr "Stampa definitiva"
 
+<<<<<<< HEAD
 #: report:report.central_journal_report:116
 #. module: account_central_journal
 msgid "ACCOUNT JOURNAL"
 msgstr "Giornale di Contabilità"
+=======
+#: report:addons/account_central_journal/report/central_journal_report.mako:120
+#. module: account_central_journal
+msgid "ACCOUNT JOURNAL"
+msgstr "ACCOUNT JOURNAL"
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
 

@@ -14,7 +14,11 @@
     .p_row {
         page-break-inside: avoid; 
         vertical-align:text-top;
+<<<<<<< HEAD
         height: 21px;
+=======
+        height: 16px;
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
         }
     .p_cell {
         overflow: hidden;
@@ -91,7 +95,11 @@
         result_rows = get_movements()
     %>
     <%
+<<<<<<< HEAD
         page_rows = 25
+=======
+        page_rows = 30
+>>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
         
         num_rows = len(result_rows)
         num_row = 0
