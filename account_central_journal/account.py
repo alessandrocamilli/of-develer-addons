@@ -40,3 +40,11 @@ class account_fiscalyear(orm.Model):
         'progressive_credit': lambda *a: float(),
         'progressive_debit': lambda *a: float(),
     }
+
+class account_fiscalyear(orm.Model):
+    _inherit = "account.journal"
+    _columns = {
+        'central_journal_exclude': fields.boolean('Exclude from Central \
+            Journal')
+    }
+                

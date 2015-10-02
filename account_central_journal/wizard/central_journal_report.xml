@@ -12,13 +12,19 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Printing parameters of the Center Journal">
-                    <group colspan="4" col="4">
-                        <separator colspan="4" string="Reference"/>
+                    <group string="Reference" colspan="4">
                         <field name="fiscalyear" on_change="onchange_fiscalyear(fiscalyear)"/>
-                        <separator colspan="4" string="Dates movements"/>
-                        <field name="date_move_line_from" invisible="1"/>
-                        <field name="date_move_line_from_view" readonly="1"/>
-                        <field name="date_move_line_to" attrs="{'readonly':[('print_state','!=','print')]}"/>
+                    </group>
+                    <newline/>
+                    <group>
+                        <group string="Dates movements">
+                        	<field name="date_move_line_from" invisible="1"/>
+	                        <field name="date_move_line_from_view" readonly="1"/>
+	                        <field name="date_move_line_to" attrs="{'readonly':[('print_state','!=','print')]}"/>
+                        </group>
+                        <group string="Options">
+                        	<field name="target_move"/>
+                        </group>
                     </group>
                     <newline/>
                     <separator colspan="4"/>

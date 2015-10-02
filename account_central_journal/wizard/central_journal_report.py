@@ -70,6 +70,14 @@ class central_journal_report(osv.osv_memory):
         'date_move_line_to': fields.date('to date', required=True),
         'fiscalyear': fields.selection(_get_fiscal_years, 'Fiscal Year', required=True),
         'print_state': fields.selection([('draft','Draft'),('print','Ready for printing'),('printed','Printed')],'State',readonly=True),
+        'target_move': fields.selection([('posted', 'Posted'),
+                                         ('all', 'All')],
+                                        'Target Move')
+    }
+    
+    _defaults = {
+        'target_move': 'posted',
+        'print_state': 'draft',
     }
         
     def onchange_fiscalyear(self, cr, uid, ids, fiscalyear_id=False, context=None):
@@ -128,8 +136,3 @@ class central_journal_report(osv.osv_memory):
             'datas': datas,
         }
         
-    _defaults = {
-        'print_state': 'draft',
-    }
-
-central_journal_report()
