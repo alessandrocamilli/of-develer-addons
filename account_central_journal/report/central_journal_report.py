@@ -45,7 +45,7 @@ class central_journal_report(report_sxw.rml_parse):
             self.filters.append(filter)
         if form_values['target_move'] \
                 and not form_values['target_move'] == 'all':
-            filter=("state", "=", form_values['target_move'])
+            filter=("move_id.state", "=", form_values['target_move'])
             self.filters.append(filter)
         # journals to exclude
         domain = [('central_journal_exclude', '=', True)]
