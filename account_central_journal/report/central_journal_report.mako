@@ -16,6 +16,9 @@
         vertical-align:text-top;
         height: 16px;
         }
+    .new_move {
+    	border-top: 1px dotted grey;
+    }
     .p_cell {
         overflow: hidden;
         padding: 1px 5px;
@@ -99,6 +102,8 @@
         
         progr_page = print_info['start_page']
         progr_row = print_info['start_row']
+        
+        save_move_id = 0
     %>
     <%
         debit_tot = print_info['start_debit']
@@ -150,10 +155,19 @@
                 <td class="p_cell p_cell_credit"><span class="p_text p_credit">${ formatLang(credit_tot, digits=get_digits(dp='Account')) |entity }</span></td>
             </tr>
         % endif
-        <tr class="p_row">
-            <td class="p_cell p_cell_progr_row"><span class="p_text p_progr_row">${progr_row}</span></td>
+        % if not line.move_id.id == save_move_id:
+        	<%
+        	class_new_move = "new_move"
+        	%>
+        % else:
+        	<%
+        	class_new_move = False
+        	%>
+        % endif
+        <tr class="p_row ${ class_new_move or ''|entity } ">
+            <td class="p_cell p_cell_progr_row "><span class="p_text p_progr_row">${progr_row}</span></td>
             <td class="p_cell p_cell_date"><span class="p_text p_date">${ formatLang(line.date, date=True) or ''|entity }</span></td>
-            <td class="p_cell p_cell_ref"><span class="p_text p_ref">${ line.ref or ''|entity }</span></td>
+            <td class="p_cell p_cell_ref"><span class="p_text p_ref">${ line.ref or ''|entity } ${ line.move_id.id or ''|entity }</span></td>
             <td class="p_cell p_cell_move_id_name"><span class="p_text p_move_id_name">${ line.move_id.name or ''|entity }</span></td>
             <td class="p_cell p_cell_account_id_code"><span class="p_text p_account_id_code">${ line.account_id.code or ''|entity }</span></td>
             <td class="p_cell p_cell_account_id_name"><span class="p_text p_account_id_name">${ line.account_id.name or ''|entity }</span></td>
@@ -164,6 +178,7 @@
         <%
         debit_tot = debit_tot + line.debit
         credit_tot = credit_tot + line.credit
+        save_move_id = line.move_id.id
         %>        
         % if (num_row % page_rows) == 0 or num_row == num_rows :
             <% 
