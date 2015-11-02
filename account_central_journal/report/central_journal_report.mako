@@ -94,7 +94,7 @@
         result_rows = get_movements()
     %>
     <%
-        page_rows = 30
+        page_rows = 40
         
         num_rows = len(result_rows)
         num_row = 0
@@ -164,6 +164,14 @@
         	class_new_move = False
         	%>
         % endif
+        <%
+        line_name = line.name
+        %>
+        % if line.partner_id:
+        	<%
+        	line_name += ' - Partner: ' + line.partner_id.name
+        	%>
+        % endif
         <tr class="p_row ${ class_new_move or ''|entity } ">
             <td class="p_cell p_cell_progr_row "><span class="p_text p_progr_row">${progr_row}</span></td>
             <td class="p_cell p_cell_date"><span class="p_text p_date">${ formatLang(line.date, date=True) or ''|entity }</span></td>
@@ -171,7 +179,7 @@
             <td class="p_cell p_cell_move_id_name"><span class="p_text p_move_id_name">${ line.move_id.name or ''|entity }</span></td>
             <td class="p_cell p_cell_account_id_code"><span class="p_text p_account_id_code">${ line.account_id.code or ''|entity }</span></td>
             <td class="p_cell p_cell_account_id_name"><span class="p_text p_account_id_name">${ line.account_id.name or ''|entity }</span></td>
-            <td class="p_cell p_cell_name"><span class="p_text p_name">${ line.name or ''|entity }</span></td>
+            <td class="p_cell p_cell_name"><span class="p_text p_name">${ line_name or ''|entity }</span></td>
             <td class="p_cell p_cell_debit"><span class="p_text p_debit">${ formatLang(line.debit, digits=get_digits(dp='Account')) |entity }</span></td>
             <td class="p_cell p_cell_credit"><span class="p_text p_credit">${ formatLang(line.credit, digits=get_digits(dp='Account')) |entity }</span></td>
         </tr>

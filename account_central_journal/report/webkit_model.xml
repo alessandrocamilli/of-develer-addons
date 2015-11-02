@@ -3,7 +3,7 @@
     <data> 
         <record id="ir_header_central_journal_report" model="ir.header_webkit">
             <field name="footer_html"></field>
-            <field eval="&quot;&quot;&quot;Landscape&quot;&quot;&quot;" name="orientation"/>
+            <field eval="&quot;&quot;&quot;Portrait&quot;&quot;&quot;" name="orientation"/>
             <field eval="&quot;&quot;&quot;A4&quot;&quot;&quot;" name="format"/>
             <field name="html"><![CDATA[<html>
     <head>
