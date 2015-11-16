@@ -1,6 +1,2 @@
 Daniele Arcangeli <d.arcangeli@isa.it>
-<<<<<<< HEAD
-Alessandro Camilli <a.camilli@yahoo.it>
-=======
 Alessandro Camilli <a.camilli@openforce.it>
->>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05

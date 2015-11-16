@@ -29,14 +29,7 @@ class central_journal_report(report_sxw.rml_parse):
     def _set_wizard_params(self,form_values):
         if form_values['date_move_line_from'] :
             date_move_line_from=form_values['date_move_line_from']
-<<<<<<< HEAD
-            filter=("date",">=",date_move_line_from)
-            self.filters.append(filter)
-        if form_values['date_move_line_to'] :
-            date_move_line_to=form_values['date_move_line_to']
-            filter=("date","<=",date_move_line_to)
-            self.filters.append(filter)
-=======
+
             filter=("date", ">=", date_move_line_from)
             self.filters.append(filter)
         if form_values['date_move_line_to'] :
@@ -53,8 +46,6 @@ class central_journal_report(report_sxw.rml_parse):
         if j_ids:
             filter=("journal_id", "not in", j_ids)
             self.filters.append(filter)
-            
->>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
         return True
 
     def _get_print_info(self, fiscalyear_id):

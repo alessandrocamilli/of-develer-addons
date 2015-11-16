@@ -23,8 +23,6 @@
             </field>
         </record>
         
-<<<<<<< HEAD
-=======
         
         <!--
         JOURNAL
@@ -40,6 +38,5 @@
             </field>
 		</record>
         
->>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
      </data>
 </openerp>
