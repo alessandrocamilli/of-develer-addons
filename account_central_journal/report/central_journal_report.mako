@@ -14,11 +14,7 @@
     .p_row {
         page-break-inside: avoid; 
         vertical-align:text-top;
-<<<<<<< HEAD
-        height: 21px;
-=======
         height: 16px;
->>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
         }
     .new_move {
     	border-top: 1px dotted grey;
@@ -99,10 +95,14 @@
     %>
     <%
 <<<<<<< HEAD
+<<<<<<< HEAD
         page_rows = 25
 =======
         page_rows = 30
 >>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
+=======
+        page_rows = 22
+>>>>>>> 909b0e387eba7ec30dbb46ff83a7e5b246930010
         
         num_rows = len(result_rows)
         num_row = 0
@@ -172,6 +172,14 @@
         	class_new_move = False
         	%>
         % endif
+        <%
+        line_name = line.name
+        %>
+        % if line.partner_id:
+        	<%
+        	line_name += ' - Partner: ' + line.partner_id.name
+        	%>
+        % endif
         <tr class="p_row ${ class_new_move or ''|entity } ">
             <td class="p_cell p_cell_progr_row "><span class="p_text p_progr_row">${progr_row}</span></td>
             <td class="p_cell p_cell_date"><span class="p_text p_date">${ formatLang(line.date, date=True) or ''|entity }</span></td>
@@ -179,7 +187,7 @@
             <td class="p_cell p_cell_move_id_name"><span class="p_text p_move_id_name">${ line.move_id.name or ''|entity }</span></td>
             <td class="p_cell p_cell_account_id_code"><span class="p_text p_account_id_code">${ line.account_id.code or ''|entity }</span></td>
             <td class="p_cell p_cell_account_id_name"><span class="p_text p_account_id_name">${ line.account_id.name or ''|entity }</span></td>
-            <td class="p_cell p_cell_name"><span class="p_text p_name">${ line.name or ''|entity }</span></td>
+            <td class="p_cell p_cell_name"><span class="p_text p_name">${ line_name or ''|entity }</span></td>
             <td class="p_cell p_cell_debit"><span class="p_text p_debit">${ formatLang(line.debit, digits=get_digits(dp='Account')) |entity }</span></td>
             <td class="p_cell p_cell_credit"><span class="p_text p_credit">${ formatLang(line.credit, digits=get_digits(dp='Account')) |entity }</span></td>
         </tr>

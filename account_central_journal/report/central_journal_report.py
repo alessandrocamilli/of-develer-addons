@@ -102,7 +102,7 @@ class central_journal_report(report_sxw.rml_parse):
             'set_wizard_params': self._set_wizard_params,
             'get_movements': self._get_movements,
         })
-
+    
 report_sxw.report_sxw('report.central_journal_report',
                        'account.move.line', 
                        'addons/account_central_journal/report/central_journal_report.mako',
