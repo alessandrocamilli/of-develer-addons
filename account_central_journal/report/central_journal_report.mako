@@ -94,7 +94,7 @@
         result_rows = get_movements()
     %>
     <%
-        page_rows = 28
+        page_rows = 22
         
         num_rows = len(result_rows)
         num_row = 0
