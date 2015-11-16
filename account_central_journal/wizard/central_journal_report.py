@@ -136,11 +136,8 @@ class central_journal_report(osv.osv_memory):
             'datas': datas,
         }
         
-<<<<<<< HEAD
     _defaults = {
         'print_state': 'draft',
     }
 
 central_journal_report()
-=======
->>>>>>> 884d37426bee2f89ac198067bddc9d7509c85a05
