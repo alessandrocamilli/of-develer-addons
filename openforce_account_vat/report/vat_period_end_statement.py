@@ -123,13 +123,6 @@ class of_print_vat_period_end_statement(report_sxw.rml_parse):
                             % (tax_code.code, tax_code.name, base_code.code, base_code.name))
                 tax_amount = tax_code.sum_period
                 tax_base_amount = base_code.sum_period
-                if context.get('vat_suspension', False) \
-                        and (not tax_amount and not tax_base_amount):
-                    context_save = context
-                    context['based_on'] = 'vat_on_payment'
-                    tax_amount = tax_code.sum_period
-                    tax_base_amount = base_code.sum_period
-                    context = context_save 
                 if tax_amount \
                         or tax_base_amount \
                         or context.get('vat_suspension', False):
