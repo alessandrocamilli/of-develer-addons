@@ -27,6 +27,7 @@ import time
 from report import report_sxw
 from openerp.tools.translate import _
 from openerp.osv import orm
+from decimal import Context
 #from account_vat_period_end_statement.report import vat_period_end_statement
 
 class of_print_vat_period_end_statement(report_sxw.rml_parse):
@@ -44,6 +45,7 @@ class of_print_vat_period_end_statement(report_sxw.rml_parse):
             'time': time,
             'statement': self._get_statement,
             'tax_codes_amounts': self._get_tax_codes_amounts,
+            'tax_codes_amounts_suspension': self._get_tax_codes_amounts_suspension,
             'account_vat_amounts': self._get_account_vat_amounts,
         })
         self.context = context
@@ -104,25 +106,36 @@ class of_print_vat_period_end_statement(report_sxw.rml_parse):
         # search for taxes linked to that code
         tax_ids = tax_pool.search(self.cr, self.uid, [('tax_code_id', '=', tax_code.id)], context=context)
         if tax_ids:
-            tax = tax_pool.browse(self.cr, self.uid, tax_ids[0], context=context)
-            # search for the related base code
-            base_code = tax.base_code_id or tax.parent_id and tax.parent_id.base_code_id or False
-            if not base_code:
-                raise orm.except_orm(_('Error'), 
-                    _('No base code found for tax code %s') % tax_code.name)
-            # check if every tax is linked to the same tax code and base code
             for tax in tax_pool.browse(self.cr, self.uid, tax_ids, context=context):
-                test_base_code = tax.base_code_id or tax.parent_id and tax.parent_id.base_code_id or False
-                if test_base_code.id != base_code.id:
+                # tax = tax_pool.browse(self.cr, self.uid, tax_ids[0], context=context)
+                # search for the related base code
+                base_code = tax.base_code_id or tax.parent_id and tax.parent_id.base_code_id or False
+                if not base_code:
                     raise orm.except_orm(_('Error'), 
-                        _('Not every tax linked to tax code %s - %s is linked \
-                            the same base code. Base code is %s - %s') 
-                        % (tax_code.code, tax_code.name, base_code.code, base_code.name))
-            if tax_code.sum_period \
-                    or base_code.sum_period :
-                
-                tax_vals = self._compute_tax_amount(tax, tax_code, base_code, context)
-                res.update(tax_vals)
+                        _('No base code found for tax code %s') % tax_code.name)
+                # check if every tax is linked to the same tax code and base code
+                for tax in tax_pool.browse(self.cr, self.uid, tax_ids, context=context):
+                    test_base_code = tax.base_code_id or tax.parent_id and tax.parent_id.base_code_id or False
+                    if test_base_code.id != base_code.id:
+                        raise orm.except_orm(_('Error'), 
+                            _('Not every tax linked to tax code %s - %s is linked \
+                                the same base code. Base code is %s - %s') 
+                            % (tax_code.code, tax_code.name, base_code.code, base_code.name))
+                tax_amount = tax_code.sum_period
+                tax_base_amount = base_code.sum_period
+                if context.get('vat_suspension', False) \
+                        and (not tax_amount and not tax_base_amount):
+                    context_save = context
+                    context['based_on'] = 'vat_on_payment'
+                    tax_amount = tax_code.sum_period
+                    tax_base_amount = base_code.sum_period
+                    context = context_save 
+                if tax_amount \
+                        or tax_base_amount \
+                        or context.get('vat_suspension', False):
+                    
+                    tax_vals = self._compute_tax_amount(tax, tax_code, base_code, context)
+                    res.update(tax_vals)
                 
         for child_code in tax_code.child_ids:
                 res = self._build_codes_dict(child_code, res=res, context=context)
@@ -137,6 +150,18 @@ class of_print_vat_period_end_statement(report_sxw.rml_parse):
         context['period_id'] = period_id
         for tax_code in code_pool.browse(self.cr, self.uid, tax_code_ids, context=context):
             res = self._build_codes_dict(tax_code, res=res, context=context)
+        return res
+    
+    def _get_tax_codes_amounts_suspension(self, period_id, tax_code_ids=[], context=None):
+        if context is None:
+            context = {}
+        res = {}
+        code_pool = self.pool.get('account.tax.code')
+        context['period_id'] = period_id
+        context['vat_suspension'] = True
+        for tax_code in code_pool.browse(self.cr, self.uid, tax_code_ids, context=context):
+            res = self._build_codes_dict(tax_code, res=res, context=context)
+        context['vat_suspension'] = False 
         return res
     
     def _get_account_vat_amounts(self, type='credit', statement_account_line=[], context=None):

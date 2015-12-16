@@ -202,7 +202,7 @@ h4 {
 		## --------------
 		%if 'credit_vat_suspension_account_line_ids' in statement:
 		<% ps_tax_codes = [l.tax_code_id.id for l in statement.credit_vat_suspension_account_line_ids] %>
-		<% ps_tax_codes_amounts = tax_codes_amounts(period.id, ps_tax_codes) %>
+		<% ps_tax_codes_amounts = tax_codes_amounts_suspension(period.id, ps_tax_codes) %>
 		<h4>${ _('Acquisti in Sospensione')} </h4>
 		<table class="table table-condensed">
 		<thead>
@@ -257,7 +257,7 @@ h4 {
 		## --------------
 		%if 'debit_vat_suspension_account_line_ids' in statement:
 		<% ps_tax_codes = [l.tax_code_id.id for l in statement.debit_vat_suspension_account_line_ids] %>
-		<% ps_tax_codes_amounts = tax_codes_amounts(period.id, ps_tax_codes) %>
+		<% ps_tax_codes_amounts = tax_codes_amounts_suspension(period.id, ps_tax_codes) %>
 		<h4>${ _('Vendite in Sospensione')} </h4>
 		<table class="table table-condensed">
 		<thead>
